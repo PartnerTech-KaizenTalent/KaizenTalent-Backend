@@ -22,6 +22,7 @@ public class Code_SignupValidations {
                         "proceso de registro previo."),
                         HttpStatus.CONFLICT);
             case "ACTIVO":
+            case "BLOQUEADO":
                 return new ResponseEntity<>(new MessageResponse("Ya se encuentra en uso este correo electrónico por " +
                         "un usuario registrado en el sistema."),
                         HttpStatus.CONFLICT);

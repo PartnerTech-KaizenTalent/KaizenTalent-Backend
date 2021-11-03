@@ -66,9 +66,10 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/photos/**").permitAll()
+                .antMatchers("/logos/**").permitAll()
+                .antMatchers("/cvfiles/**").permitAll()
                 .antMatchers("/api/**").permitAll()
                 .antMatchers("/").permitAll()
-                .antMatchers("/images/**").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

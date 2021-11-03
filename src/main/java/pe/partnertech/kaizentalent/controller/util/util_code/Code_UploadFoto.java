@@ -23,14 +23,15 @@ import java.util.UUID;
 
 public class Code_UploadFoto {
 
-    public static void AssignFoto(Usuario usuario, InputStream fotoStream, IImagenService imagenService) throws IOException {
+    public static void AssignImagen(Usuario usuario, InputStream fotoStream, IImagenService imagenService, String path)
+            throws IOException {
 
         String nombre_foto = UUID.randomUUID() + usuario.getIdUsuario().toString() + UUID.randomUUID()
                 + ".png";
 
         String url_foto = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
-                .path("/photos/")
+                .path(path)
                 .path(nombre_foto)
                 .toUriString();
 

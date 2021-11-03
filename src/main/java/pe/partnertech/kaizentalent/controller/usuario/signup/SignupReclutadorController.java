@@ -6,18 +6,15 @@ package pe.partnertech.kaizentalent.controller.usuario.signup;
 
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
-import pe.partnertech.kaizentalent.controller.util.util_code.Code_SendVerifyEmail;
-import pe.partnertech.kaizentalent.controller.util.util_code.Code_SetUserRol;
-import pe.partnertech.kaizentalent.controller.util.util_code.Code_SignupValidations;
-import pe.partnertech.kaizentalent.controller.util.util_code.Code_UploadFoto;
+import pe.partnertech.kaizentalent.controller.util.util_code.*;
+import pe.partnertech.kaizentalent.dto.request.usuario.general.UtilityTokenRequest;
 import pe.partnertech.kaizentalent.dto.request.usuario.signup.ReclutadorSignupRequest;
 import pe.partnertech.kaizentalent.dto.response.general.MessageResponse;
 import pe.partnertech.kaizentalent.enums.RolNombre;
@@ -31,14 +28,13 @@ import pe.partnertech.kaizentalent.service.IUtilityTokenService;
 import pe.partnertech.kaizentalent.tools.UtilityKaizenTalent;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -68,7 +64,7 @@ public class SignupReclutadorController {
     TemplateEngine templateEngine;
 
     @Value("${spring.mail.username}")
-    private String mail;
+    private String mail_kaizen;
 
     @Value("${front.baseurl}")
     private String baseurl;
@@ -131,7 +127,7 @@ public class SignupReclutadorController {
                         if (reclutador_data.isPresent()) {
                             Usuario reclutador = reclutador_data.get();
 
-                            //Asignando Rol: Postulante
+                            //Asignando Rol: Reclutador
                             Code_SetUserRol.SetUserRol(reclutador, rol_data);
 
                             //Asignando TipoDocumento: RUC
@@ -143,9 +139,9 @@ public class SignupReclutadorController {
                             //Asignando Estado de Cuenta: PENDIENTE
                             reclutador.setEstadoUsuario("PENDIENTE");
 
-                            //Asignando Foto por Defecto: Postulante
+                            //Asignando Foto por Defecto: Reclutador
                             InputStream fotoStream = getClass().getResourceAsStream("/static/img/ReclutadorUser.png");
-                            Code_UploadFoto.AssignFoto(reclutador, fotoStream, imagenService);
+                            Code_UploadFoto.AssignImagen(reclutador, fotoStream, imagenService, "/logos/");
 
                             String token = RandomString.make(50);
 
@@ -188,10 +184,26 @@ public class SignupReclutadorController {
         }
     }
 
-    private void EnviarCorreo(String email, String url) throws MessagingException, UnsupportedEncodingException {
+    @GetMapping("/reclutador_verify_gateway")
+    void RedirectReclutadorVerify(HttpServletResponse response, @Param(value = "token") String token) throws IOException {
 
-        Code_SendVerifyEmail.EnviarCorreo(email, url, mailSender, mail, img_logo, img_check, templateEngine);
+        Optional<UtilityToken> utilitytoken_data = utilityTokenService.BuscarUtilityToken_By_Token(token);
+
+        if (utilitytoken_data.isPresent()) {
+            response.sendRedirect(baseurl + "/signup/reclutador/verify/" + token);
+        } else {
+            response.sendRedirect(baseurl + "/error/403");
+        }
     }
 
+    @PutMapping("/reclutador/signup/verify")
+    public ResponseEntity<?> SignupReclutadorVerify(@RequestBody UtilityTokenRequest utilityTokenRequest) {
 
+        return Code_VerifyUser.VerifyUser(utilityTokenRequest, utilityTokenService, usuarioService);
+    }
+
+    private void EnviarCorreo(String email, String url) throws MessagingException, UnsupportedEncodingException {
+
+        Code_SendEmail.VerifyEmail(email, url, mailSender, mail_kaizen, img_logo, img_check, templateEngine);
+    }
 }
