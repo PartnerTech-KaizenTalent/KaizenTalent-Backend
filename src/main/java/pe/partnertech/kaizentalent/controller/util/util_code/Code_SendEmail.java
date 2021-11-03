@@ -51,6 +51,7 @@ public class Code_SendEmail {
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
         helper.setFrom(mail_kaizen, "Kaizen Talent Support");
+        helper.setTo(email);
 
         String asunto = "Restablecimiento de Contraseña";
 
