@@ -9,14 +9,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pe.partnertech.kaizentalent.dto.response.general.MessageResponse;
 import pe.partnertech.kaizentalent.model.DocumentoCV;
-import pe.partnertech.kaizentalent.model.Imagen;
 import pe.partnertech.kaizentalent.model.Usuario;
 import pe.partnertech.kaizentalent.service.IDocumentoCVService;
 import pe.partnertech.kaizentalent.service.IUsuarioService;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/api")
@@ -37,26 +41,28 @@ public class UpdateDocumentoCVController {
     @PutMapping("/postulante/{id_postulante}/update/cv")
     @PreAuthorize("hasRole('ROLE_POSTULANTE')")
     public ResponseEntity<?> UpdateDocumentoCVPostulante(@PathVariable("id_postulante") Long id_postulante,
-                                                  @RequestPart("documentocv") MultipartFile documentocv) {
+                                                         @RequestPart("cv") MultipartFile cv) {
 
         Optional<Usuario> postulante_data = usuarioService.BuscarUsuario_By_IDUsuario(id_postulante);
 
-        /*if (postulante_data.isPresent()) {
+        if (postulante_data.isPresent()) {
             Usuario postulante = postulante_data.get();
 
-            Optional<DocumentoCV> imagen_data = imagenService.BuscarImagen_By_ID(postulante.getImagenUsuario().getIdImagen());
+            Optional<DocumentoCV> documentocv_data =
+                    documentoCVService.BuscarDocumentoCV_By_ID(postulante.getDocumentoCVUsuario().getIdDocumentoCV());
 
-            if (imagen_data.isPresent()) {
+            if (documentocv_data.isPresent()) {
                 try {
-                    Imagen foto_perfil = imagen_data.get();
+                    DocumentoCV documentocv = documentocv_data.get();
 
-                    if (!foto.isEmpty()) {
-                        foto_perfil.setArchivoImagen(foto.getBytes());
-                        foto_perfil.setTipoarchivoImagen(foto.getContentType());
+                    if (!cv.isEmpty()) {
+                        documentocv.setArchivoDocumentoCV(cv.getBytes());
+                        documentocv.setTipoarchivoDocumentoCV(cv.getContentType());
+                        documentocv.setFechasubidaDocumentoCV(LocalDateTime.now());
 
-                        imagenService.GuardarImagen(foto_perfil);
+                        documentoCVService.GuardarDocumentoCV(documentocv);
 
-                        return new ResponseEntity<>(new MessageResponse("Se ha actualizado su foto de perfil " +
+                        return new ResponseEntity<>(new MessageResponse("Se ha actualizado su documento cv " +
                                 "satisfactoriamente"),
                                 HttpStatus.OK);
                     } else {
@@ -68,14 +74,44 @@ public class UpdateDocumentoCVController {
                             HttpStatus.EXPECTATION_FAILED);
                 }
             } else {
-                return new ResponseEntity<>(new MessageResponse("No se encontró la información requerida."),
-                        HttpStatus.NOT_FOUND);
+                try {
+                    String separador_cv = Pattern.quote(".");
+                    String[] formato_cv = Objects.requireNonNull(cv.getOriginalFilename()).split(separador_cv);
+                    String nombre_cv = UUID.randomUUID() + postulante.getIdUsuario().toString() +
+                            UUID.randomUUID() + "." + formato_cv[formato_cv.length - 1];
+
+                    String url_cv = ServletUriComponentsBuilder
+                            .fromCurrentContextPath()
+                            .path("/cvfiles/")
+                            .path(nombre_cv)
+                            .toUriString();
+
+                    DocumentoCV documento_cv = new DocumentoCV(
+                            nombre_cv,
+                            cv.getContentType(),
+                            url_cv,
+                            cv.getBytes(),
+                            LocalDateTime.now(),
+                            postulante
+                    );
+                    documentoCVService.GuardarDocumentoCV(documento_cv);
+
+                    return new ResponseEntity<>(new MessageResponse("Se ha actualizado su documento cv satisfactoriamente."),
+                            HttpStatus.OK);
+                } catch (Exception e) {
+                    return new ResponseEntity<>(new MessageResponse("No se puede subir el archivo " + e),
+                            HttpStatus.EXPECTATION_FAILED);
+                }
             }
         } else {
             return new ResponseEntity<>(new MessageResponse("No se encontró información del usuario."),
                     HttpStatus.NOT_FOUND);
         }
-    }*/
-        return null;
     }
 }
+
+
+
+
+
+
