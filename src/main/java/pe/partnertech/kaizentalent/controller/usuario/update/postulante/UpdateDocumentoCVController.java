@@ -48,32 +48,7 @@ public class UpdateDocumentoCVController {
         if (postulante_data.isPresent()) {
             Usuario postulante = postulante_data.get();
 
-            Optional<DocumentoCV> documentocv_data =
-                    documentoCVService.BuscarDocumentoCV_By_ID(postulante.getDocumentoCVUsuario().getIdDocumentoCV());
-
-            if (documentocv_data.isPresent()) {
-                try {
-                    DocumentoCV documentocv = documentocv_data.get();
-
-                    if (!cv.isEmpty()) {
-                        documentocv.setArchivoDocumentoCV(cv.getBytes());
-                        documentocv.setTipoarchivoDocumentoCV(cv.getContentType());
-                        documentocv.setFechasubidaDocumentoCV(LocalDateTime.now());
-
-                        documentoCVService.GuardarDocumentoCV(documentocv);
-
-                        return new ResponseEntity<>(new MessageResponse("Se ha actualizado su documento cv " +
-                                "satisfactoriamente"),
-                                HttpStatus.OK);
-                    } else {
-                        return new ResponseEntity<>(new MessageResponse("No se ha seleccionado un archivo."),
-                                HttpStatus.BAD_REQUEST);
-                    }
-                } catch (Exception e) {
-                    return new ResponseEntity<>(new MessageResponse("No se puede subir el archivo " + e),
-                            HttpStatus.EXPECTATION_FAILED);
-                }
-            } else {
+            if (postulante.getDocumentoCVUsuario() == null) {
                 try {
                     String separador_cv = Pattern.quote(".");
                     String[] formato_cv = Objects.requireNonNull(cv.getOriginalFilename()).split(separador_cv);
@@ -102,6 +77,36 @@ public class UpdateDocumentoCVController {
                     return new ResponseEntity<>(new MessageResponse("No se puede subir el archivo " + e),
                             HttpStatus.EXPECTATION_FAILED);
                 }
+            } else {
+                Optional<DocumentoCV> documentocv_data =
+                        documentoCVService.BuscarDocumentoCV_By_ID(postulante.getDocumentoCVUsuario().getIdDocumentoCV());
+
+                if (documentocv_data.isPresent()) {
+                    try {
+                        DocumentoCV documentocv = documentocv_data.get();
+
+                        if (!cv.isEmpty()) {
+                            documentocv.setArchivoDocumentoCV(cv.getBytes());
+                            documentocv.setTipoarchivoDocumentoCV(cv.getContentType());
+                            documentocv.setFechasubidaDocumentoCV(LocalDateTime.now());
+
+                            documentoCVService.GuardarDocumentoCV(documentocv);
+
+                            return new ResponseEntity<>(new MessageResponse("Se ha actualizado su documento cv " +
+                                    "satisfactoriamente"),
+                                    HttpStatus.OK);
+                        } else {
+                            return new ResponseEntity<>(new MessageResponse("No se ha seleccionado un archivo."),
+                                    HttpStatus.BAD_REQUEST);
+                        }
+                    } catch (Exception e) {
+                        return new ResponseEntity<>(new MessageResponse("No se puede subir el archivo " + e),
+                                HttpStatus.EXPECTATION_FAILED);
+                    }
+                } else {
+                    return new ResponseEntity<>(new MessageResponse("No se encontró la información requerida."),
+                            HttpStatus.NOT_FOUND);
+                }
             }
         } else {
             return new ResponseEntity<>(new MessageResponse("No se encontró información del usuario."),
@@ -109,6 +114,7 @@ public class UpdateDocumentoCVController {
         }
     }
 }
+
 
 
 
