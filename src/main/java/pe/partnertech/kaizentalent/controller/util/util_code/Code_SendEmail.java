@@ -18,7 +18,7 @@ import java.util.Map;
 public class Code_SendEmail {
 
     public static void VerifyEmail(String email, String url, JavaMailSender mailSender, String mail_kaizen, String img_logo,
-                             String img_check, TemplateEngine templateEngine)
+                                   String img_check, TemplateEngine templateEngine)
             throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);

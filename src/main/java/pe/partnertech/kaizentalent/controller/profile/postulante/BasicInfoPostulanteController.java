@@ -13,8 +13,6 @@ import pe.partnertech.kaizentalent.dto.response.general.ImagenResponse;
 import pe.partnertech.kaizentalent.dto.response.general.MessageResponse;
 import pe.partnertech.kaizentalent.dto.response.profile.postulante.BasicInfoPostulanteResponse;
 import pe.partnertech.kaizentalent.model.Usuario;
-import pe.partnertech.kaizentalent.service.IDocumentoCVService;
-import pe.partnertech.kaizentalent.service.IImagenService;
 import pe.partnertech.kaizentalent.service.IUsuarioService;
 
 import java.util.Optional;
@@ -27,17 +25,8 @@ public class BasicInfoPostulanteController {
     final
     IUsuarioService usuarioService;
 
-    final
-    IImagenService imagenService;
-
-    final
-    IDocumentoCVService documentoCVService;
-
-    public BasicInfoPostulanteController(IUsuarioService usuarioService, IImagenService imagenService,
-                                         IDocumentoCVService documentoCVService) {
+    public BasicInfoPostulanteController(IUsuarioService usuarioService) {
         this.usuarioService = usuarioService;
-        this.imagenService = imagenService;
-        this.documentoCVService = documentoCVService;
     }
 
     @GetMapping("/postulante/{id_postulante}/profile/basicinfo")
@@ -52,8 +41,8 @@ public class BasicInfoPostulanteController {
             DocumentoCVResponse documentocv = new DocumentoCVResponse();
 
             if (postulante.getDocumentoCVUsuario() == null) {
-               documentocv.setNombreDocumentoCV(null);
-               documentocv.setUrlDocumentoCV(null);
+                documentocv.setNombreDocumentoCV(null);
+                documentocv.setUrlDocumentoCV(null);
             } else {
                 documentocv.setNombreDocumentoCV(postulante.getDocumentoCVUsuario().getNombreDocumentoCV());
                 documentocv.setUrlDocumentoCV(postulante.getDocumentoCVUsuario().getUrlDocumentoCV());
