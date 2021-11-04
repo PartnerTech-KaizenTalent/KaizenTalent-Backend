@@ -51,6 +51,8 @@ public class PublicacionController {
         Optional<Usuario> reclutador_data = usuarioService.BuscarUsuario_By_IDUsuario(id_reclutador);
 
         if (reclutador_data.isPresent()) {
+
+            System.out.println(ValidarPublicacion(id_reclutador, puestotrabajo, usuariosPuestosTrabajoService));
             if (ValidarPublicacion(id_reclutador, puestotrabajo, usuariosPuestosTrabajoService) < 1) {
                 Usuario reclutador = reclutador_data.get();
 
@@ -94,6 +96,8 @@ public class PublicacionController {
     public ResponseEntity<?> UpdatePuestoTrabajo(@PathVariable("id_reclutador") Long id_reclutador,
                                                  @PathVariable("id_publicacion") Long id_publicacion,
                                                  @RequestBody PuestoTrabajo puestotrabajo) {
+
+        System.out.println(ValidarPublicacion(id_reclutador, puestotrabajo, usuariosPuestosTrabajoService));
 
         if (ValidarPublicacion(id_reclutador, puestotrabajo, usuariosPuestosTrabajoService) < 1) {
             Optional<PuestoTrabajo> publicacion_data = puestoTrabajoService.BuscarPuestoTrabajo_By_ID(id_publicacion);
