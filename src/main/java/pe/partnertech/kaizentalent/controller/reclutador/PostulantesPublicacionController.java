@@ -84,7 +84,8 @@ public class PostulantesPublicacionController {
                                                     null,
                                                     null
                                             )));
-                        }});
+                        }
+                    });
 
             return new ResponseEntity<>(new PublicacionResponse(publicacion.getNombrePuestoTrabajo(), list_postulantes),
                     HttpStatus.OK);
