@@ -23,7 +23,7 @@ public class DocumentoCV implements Serializable {
     @Column(name = "nombre_documentocv")
     private String nombreDocumentoCV;
 
-    @Column(name = "tipoarchivo_documentocv", length = 25)
+    @Column(name = "tipoarchivo_documentocv")
     private String tipoarchivoDocumentoCV;
 
     @Column(name = "url_documentocv")

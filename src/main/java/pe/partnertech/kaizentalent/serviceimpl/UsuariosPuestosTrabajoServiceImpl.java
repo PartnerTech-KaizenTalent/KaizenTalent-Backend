@@ -27,6 +27,17 @@ public class UsuariosPuestosTrabajoServiceImpl implements IUsuariosPuestosTrabaj
     }
 
     @Override
+    public Set<UsuariosPuestosTrabajo> ValidarPublicaciones(Long id_reclutador, String nombre_puestotrabajo,
+                                                            String ciudad_puestotrabajo, String categoria_puestotrabajo,
+                                                            String modalidad_puestotrabajo, String tipojornada_puestotrabajo,
+                                                            String sueldo_puestotrabajo, int experiencia_puestotrabajo,
+                                                            int periodoinicio_puestotrabajo, String descripcion_puestotrabajo) {
+        return data.findPublicacionesToValidate(id_reclutador, nombre_puestotrabajo, ciudad_puestotrabajo,
+                categoria_puestotrabajo, modalidad_puestotrabajo, tipojornada_puestotrabajo, sueldo_puestotrabajo,
+                experiencia_puestotrabajo, periodoinicio_puestotrabajo, descripcion_puestotrabajo);
+    }
+
+    @Override
     public Set<UsuariosPuestosTrabajo> MostrarPublicaciones() {
         return data.findPublicaciones();
     }

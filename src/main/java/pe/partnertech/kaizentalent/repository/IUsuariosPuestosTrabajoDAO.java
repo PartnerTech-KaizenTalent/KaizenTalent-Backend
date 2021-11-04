@@ -20,6 +20,30 @@ public interface IUsuariosPuestosTrabajoDAO extends JpaRepository<UsuariosPuesto
     @Query("SELECT upt FROM UsuariosPuestosTrabajo upt " +
             "JOIN PuestoTrabajo pt ON upt.puestotrabajo.idPuestoTrabajo = pt.idPuestoTrabajo " +
             "JOIN Usuario u ON upt.usuario.idUsuario = u.idUsuario " +
+            "WHERE u.idUsuario = ?1 AND " +
+            "pt.nombrePuestoTrabajo LIKE UPPER(CONCAT('%', ?2, '%')) AND " +
+            "pt.ciudadPuestoTrabajo LIKE ?3 AND " +
+            "pt.categoriaPuestoTrabajo LIKE ?4 AND " +
+            "pt.modalidadPuestoTrabajo LIKE ?5 AND " +
+            "pt.tipojornadaPuestoTrabajo LIKE ?6 AND " +
+            "pt.sueldoPuestoTrabajo LIKE ?7 AND " +
+            "pt.experienciaPuestoTrabajo = ?8 AND " +
+            "pt.periodoinicioPuestoTrabajo = ?9 AND " +
+            "pt.descripcionPuestoTrabajo LIKE UPPER(CONCAT('%', ?10, '%'))")
+    Set<UsuariosPuestosTrabajo> findPublicacionesToValidate(Long id_reclutador,
+                                                            String nombre_puestotrabajo,
+                                                            String ciudad_puestotrabajo,
+                                                            String categoria_puestotrabajo,
+                                                            String modalidad_puestotrabajo,
+                                                            String tipojornada_puestotrabajo,
+                                                            String sueldo_puestotrabajo,
+                                                            int experiencia_puestotrabajo,
+                                                            int periodoinicio_puestotrabajo,
+                                                            String descripcion_puestotrabajo);
+
+    @Query("SELECT upt FROM UsuariosPuestosTrabajo upt " +
+            "JOIN PuestoTrabajo pt ON upt.puestotrabajo.idPuestoTrabajo = pt.idPuestoTrabajo " +
+            "JOIN Usuario u ON upt.usuario.idUsuario = u.idUsuario " +
             "JOIN Imagen i ON u.imagenUsuario.idImagen = i.idImagen " +
             "JOIN DocumentoCV dcv ON u.documentoCVUsuario.idDocumentoCV = dcv.idDocumentoCV " +
             "WHERE pt.estadoPuestoTrabajo LIKE 'Activo' " +

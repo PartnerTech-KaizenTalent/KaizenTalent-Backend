@@ -13,6 +13,12 @@ import java.util.Set;
 
 public interface IUsuariosPuestosTrabajoService {
 
+    Set<UsuariosPuestosTrabajo> ValidarPublicaciones(Long id_reclutador, String nombre_puestotrabajo,
+                                                     String ciudad_puestotrabajo, String categoria_puestotrabajo,
+                                                     String modalidad_puestotrabajo, String tipojornada_puestotrabajo,
+                                                     String sueldo_puestotrabajo, int experiencia_puestotrabajo,
+                                                     int periodoinicio_puestotrabajo, String descripcion_puestotrabajo);
+
     Set<UsuariosPuestosTrabajo> MostrarPublicaciones();
 
     Set<UsuariosPuestosTrabajo> BuscarPublicaciones_By_TipoJornada(String tipojornada_publicacion);
