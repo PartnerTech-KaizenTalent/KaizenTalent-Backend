@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.partnertech.kaizentalent.dto.response.general.MessageResponse;
+import pe.partnertech.kaizentalent.dto.response.postulante.PostulacionesResponse;
 import pe.partnertech.kaizentalent.model.PuestoTrabajo;
 import pe.partnertech.kaizentalent.model.Usuario;
 import pe.partnertech.kaizentalent.model.UsuariosPuestosTrabajo;
@@ -16,7 +17,9 @@ import pe.partnertech.kaizentalent.service.IPuestoTrabajoService;
 import pe.partnertech.kaizentalent.service.IUsuarioService;
 import pe.partnertech.kaizentalent.service.IUsuariosPuestosTrabajoService;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -74,6 +77,31 @@ public class PostulacionController {
             }
         } else {
             return new ResponseEntity<>(new MessageResponse("Ocurrió un error al querer postular a la publicación."),
+                    HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/postulante/{id_postulante}/postulaciones")
+    @PreAuthorize("hasRole('ROLE_POSTULANTE')")
+    public ResponseEntity<?> MostrarPublicacionesPostulante(@PathVariable("id_postulante") Long id_postulante) {
+
+        Optional<Usuario> postulante_data = usuarioService.BuscarUsuario_By_IDUsuario(id_postulante);
+
+        if (postulante_data.isPresent()) {
+            Set<PostulacionesResponse> list_postulaciones = new HashSet<>();
+
+            usuariospuestostrabajoService.BuscarPostulaciones_By_IDPostulante(id_postulante).forEach(
+                    postulaciones -> list_postulaciones.add(
+                            new PostulacionesResponse(
+                                    postulaciones.getPuestotrabajo().getIdPuestoTrabajo(),
+                                    postulaciones.getPuestotrabajo().getNombrePuestoTrabajo(),
+                                    postulaciones.getUsuario().getNombreUsuario()
+                            )));
+
+            return new ResponseEntity<>(list_postulaciones, HttpStatus.OK);
+
+        } else {
+            return new ResponseEntity<>(new MessageResponse("No se encuentra información del perfil del usuario."),
                     HttpStatus.NOT_FOUND);
         }
     }
