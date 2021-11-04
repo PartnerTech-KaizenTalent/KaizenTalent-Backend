@@ -4,7 +4,7 @@
 
 package pe.partnertech.kaizentalent.dto.response.profile.reclutador;
 
-public class ActivePostsReclutadorResponse {
+public class PostsReclutadorResponse {
 
     //Atributos
     private Long idPuestoTrabajo;
@@ -21,14 +21,14 @@ public class ActivePostsReclutadorResponse {
     private String descripcionPuestoTrabajo;
 
     //Constructores
-    public ActivePostsReclutadorResponse() {
+    public PostsReclutadorResponse() {
     }
 
-    public ActivePostsReclutadorResponse(Long idPuestoTrabajo, String nombrePuestoTrabajo, String estadoPuestoTrabajo,
-                                         int cantidadPostulantes, String ciudadPuestoTrabajo, String categoriaPuestoTrabajo,
-                                         String modalidadPuestoTrabajo, String tipojornadaPuestoTrabajo,
-                                         String sueldoPuestoTrabajo, int experienciaPuestoTrabajo,
-                                         int periodoactualPuestoTrabajo, String descripcionPuestoTrabajo) {
+    public PostsReclutadorResponse(Long idPuestoTrabajo, String nombrePuestoTrabajo, String estadoPuestoTrabajo,
+                                   int cantidadPostulantes, String ciudadPuestoTrabajo, String categoriaPuestoTrabajo,
+                                   String modalidadPuestoTrabajo, String tipojornadaPuestoTrabajo,
+                                   String sueldoPuestoTrabajo, int experienciaPuestoTrabajo,
+                                   int periodoactualPuestoTrabajo, String descripcionPuestoTrabajo) {
         this.idPuestoTrabajo = idPuestoTrabajo;
         this.nombrePuestoTrabajo = nombrePuestoTrabajo;
         this.estadoPuestoTrabajo = estadoPuestoTrabajo;

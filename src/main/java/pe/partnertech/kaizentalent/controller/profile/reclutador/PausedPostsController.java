@@ -17,24 +17,24 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
-public class ActivePostsController {
+public class PausedPostsController {
 
     final
     IUsuariosPuestosTrabajoService usuariosPuestosTrabajoService;
 
-    public ActivePostsController(IUsuariosPuestosTrabajoService usuariosPuestosTrabajoService) {
+    public PausedPostsController(IUsuariosPuestosTrabajoService usuariosPuestosTrabajoService) {
         this.usuariosPuestosTrabajoService = usuariosPuestosTrabajoService;
     }
 
-    @GetMapping("/reclutador/{id_reclutador}/profile/posts/active")
+    @GetMapping("/reclutador/{id_reclutador}/profile/posts/paused")
     @PreAuthorize("hasRole('ROLE_RECLUTADOR')")
-    public ResponseEntity<?> PerfilReclutadorActivePosts(@PathVariable("id_reclutador") Long id_reclutador) {
+    public ResponseEntity<?> PerfilReclutadorAllPosts(@PathVariable("id_reclutador") Long id_reclutador) {
 
-        Set<PostsReclutadorResponse> active_posts = new HashSet<>();
+        Set<PostsReclutadorResponse> paused_posts = new HashSet<>();
 
-        usuariosPuestosTrabajoService.BuscarPublicaciones_By_IDReclutadorAndEstadoPublicacion(id_reclutador, "Activo")
+        usuariosPuestosTrabajoService.BuscarPublicaciones_By_IDReclutadorAndEstadoPublicacion(id_reclutador, "En Pausa")
                 .forEach(
-                        posts -> active_posts.add(
+                        posts -> paused_posts.add(
                                 new PostsReclutadorResponse(
                                         posts.getPuestotrabajo().getIdPuestoTrabajo(),
                                         posts.getPuestotrabajo().getNombrePuestoTrabajo(),
@@ -50,6 +50,6 @@ public class ActivePostsController {
                                         posts.getPuestotrabajo().getDescripcionPuestoTrabajo()
                                 )));
 
-        return new ResponseEntity<>(active_posts, HttpStatus.OK);
+        return new ResponseEntity<>(paused_posts, HttpStatus.OK);
     }
 }
