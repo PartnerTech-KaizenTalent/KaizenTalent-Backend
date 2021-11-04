@@ -16,7 +16,8 @@ public interface IConocimientoDAO extends JpaRepository<Conocimiento, Long> {
 
     @Query("SELECT c FROM Conocimiento c JOIN Usuario u ON c.usuarioConocimiento.idUsuario = u.idUsuario " +
             "WHERE u.idUsuario = ?1 AND c.nombreConocimiento LIKE ?2 AND c.nivelConocimiento LIKE ?3")
-    Set<Conocimiento> findConocimientosToValidate();
+    Set<Conocimiento> findConocimientosToValidate(Long id_postulante, String nombre_conocimiento,
+                                                  String nivel_conocimiento);
 
     @Query("SELECT c FROM Conocimiento c JOIN Usuario u ON c.usuarioConocimiento.idUsuario = u.idUsuario " +
             "WHERE u.idUsuario = ?1")
