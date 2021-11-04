@@ -36,5 +36,5 @@ public interface IUsuariosPuestosTrabajoService {
 
     void GuardarUsuariosPuestosTrabajo(UsuariosPuestosTrabajo usuariospuestostrabajo);
 
-    void EliminarUsuariosPuestosTrabajo(Long id_usuariospuestostrabajo);
+    void EliminarUsuariosPuestosTrabajoByPuestoTrabajo(PuestoTrabajo publicacion);
 }

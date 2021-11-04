@@ -80,7 +80,7 @@ public class UsuariosPuestosTrabajoServiceImpl implements IUsuariosPuestosTrabaj
     }
 
     @Override
-    public void EliminarUsuariosPuestosTrabajo(Long id_usuariospuestostrabajo) {
-        data.deleteById(id_usuariospuestostrabajo);
+    public void EliminarUsuariosPuestosTrabajoByPuestoTrabajo(PuestoTrabajo publicacion) {
+        data.deleteByPuestotrabajo(publicacion);
     }
 }

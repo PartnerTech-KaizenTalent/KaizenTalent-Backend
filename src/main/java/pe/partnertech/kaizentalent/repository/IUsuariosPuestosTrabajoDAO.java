@@ -21,7 +21,7 @@ public interface IUsuariosPuestosTrabajoDAO extends JpaRepository<UsuariosPuesto
             "JOIN PuestoTrabajo pt ON upt.puestotrabajo.idPuestoTrabajo = pt.idPuestoTrabajo " +
             "JOIN Usuario u ON upt.usuario.idUsuario = u.idUsuario " +
             "WHERE u.idUsuario = ?1 AND " +
-            "pt.nombrePuestoTrabajo LIKE UPPER(CONCAT('%', ?2, '%')) AND " +
+            "pt.nombrePuestoTrabajo LIKE ?2 AND " +
             "pt.ciudadPuestoTrabajo LIKE ?3 AND " +
             "pt.categoriaPuestoTrabajo LIKE ?4 AND " +
             "pt.modalidadPuestoTrabajo LIKE ?5 AND " +
@@ -29,7 +29,7 @@ public interface IUsuariosPuestosTrabajoDAO extends JpaRepository<UsuariosPuesto
             "pt.sueldoPuestoTrabajo LIKE ?7 AND " +
             "pt.experienciaPuestoTrabajo = ?8 AND " +
             "pt.periodoinicioPuestoTrabajo = ?9 AND " +
-            "pt.descripcionPuestoTrabajo LIKE UPPER(CONCAT('%', ?10, '%'))")
+            "pt.descripcionPuestoTrabajo LIKE ?10")
     Set<UsuariosPuestosTrabajo> findPublicacionesToValidate(Long id_reclutador,
                                                             String nombre_puestotrabajo,
                                                             String ciudad_puestotrabajo,
@@ -99,4 +99,6 @@ public interface IUsuariosPuestosTrabajoDAO extends JpaRepository<UsuariosPuesto
     Optional<UsuariosPuestosTrabajo> findPublicacionByIdPublicacion(Long id_publicacion);
 
     boolean existsByUsuarioAndPuestotrabajo(Usuario postulante, PuestoTrabajo publicacion);
+
+    void deleteByPuestotrabajo(PuestoTrabajo publicacion);
 }
