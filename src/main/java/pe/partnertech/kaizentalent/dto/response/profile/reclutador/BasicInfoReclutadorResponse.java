@@ -10,13 +10,21 @@ public class BasicInfoReclutadorResponse {
 
     //Atributos
     private String nombreReclutador;
+
     private String tituloReclutador;
+
     private String descripcionReclutador;
+
     private String direccionReclutador;
+
     private String emailReclutador;
+
     private String telefonoReclutador;
+
     private String ciudadReclutador;
+
     private String nombrecontactanteReclutador;
+
     private ImagenResponse logoempresaReclutador;
 
     //Constructores
