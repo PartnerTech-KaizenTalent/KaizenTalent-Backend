@@ -241,6 +241,7 @@ public class PublicacionController {
         Optional<PuestoTrabajo> publicacion_data = puestoTrabajoService.BuscarPuestoTrabajo_By_ID(id_publicacion);
 
         if (publicacion_data.isPresent()) {
+            usuariosPuestosTrabajoService.EliminarUsuariosPuestosTrabajoByPuestoTrabajo(publicacion_data.get());
             puestoTrabajoService.EliminarPuestoTrabajo(id_publicacion);
 
             return new ResponseEntity<>(new MessageResponse("Publicación eliminada satisfactoriamente"),

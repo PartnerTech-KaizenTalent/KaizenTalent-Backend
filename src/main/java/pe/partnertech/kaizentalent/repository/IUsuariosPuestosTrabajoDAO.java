@@ -99,4 +99,6 @@ public interface IUsuariosPuestosTrabajoDAO extends JpaRepository<UsuariosPuesto
     Optional<UsuariosPuestosTrabajo> findPublicacionByIdPublicacion(Long id_publicacion);
 
     boolean existsByUsuarioAndPuestotrabajo(Usuario postulante, PuestoTrabajo publicacion);
+
+    void deleteByPuestotrabajo(PuestoTrabajo publicacion);
 }
