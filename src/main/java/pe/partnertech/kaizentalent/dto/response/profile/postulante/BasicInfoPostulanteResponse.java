@@ -11,14 +11,23 @@ public class BasicInfoPostulanteResponse {
 
     //Atributos
     private String nombrePostulante;
+
     private String apellidoPostulante;
+
     private String direccionPostulante;
+
     private String emailPostulante;
+
     private String telefonoPostulante;
+
     private String ciudadPostulante;
+
     private String descripcionPostulante;
+
     private String tituloPostulante;
+
     private ImagenResponse fotoperfilPostulante;
+
     private DocumentoCVResponse documentocvPostulante;
 
     //Constructores

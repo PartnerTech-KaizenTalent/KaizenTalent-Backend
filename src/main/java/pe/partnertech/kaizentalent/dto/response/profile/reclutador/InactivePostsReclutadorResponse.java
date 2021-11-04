@@ -8,9 +8,12 @@ public class InactivePostsReclutadorResponse {
 
     //Atributos
     private Long idPuestoTrabajo;
+
     private String nombrePuestoTrabajo;
     private String estadoPuestoTrabajo;
+
     private int cantidadPostulantes;
+
     private int periodoactualPuestoTrabajo;
 
     //Constructores

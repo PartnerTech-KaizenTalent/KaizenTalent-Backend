@@ -11,10 +11,15 @@ public class PostulantesPublicacionResponse {
 
     //Atributos
     private Long idPostulante;
+
     private String nombrePostulante;
+
     private String tituloPostulante;
+
     private String ciudadPostulante;
+
     private ImagenResponse fotoPostulante;
+
     private DocumentoCVResponse cvPostulante;
 
     //Constructores

@@ -8,16 +8,27 @@ public class PostsReclutadorResponse {
 
     //Atributos
     private Long idPuestoTrabajo;
+
     private String nombrePuestoTrabajo;
+
     private String estadoPuestoTrabajo;
+
     private int cantidadPostulantes;
+
     private String ciudadPuestoTrabajo;
+
     private String categoriaPuestoTrabajo;
+
     private String modalidadPuestoTrabajo;
+
     private String tipojornadaPuestoTrabajo;
+
     private String sueldoPuestoTrabajo;
+
     private int experienciaPuestoTrabajo;
+
     private int periodoactualPuestoTrabajo;
+
     private String descripcionPuestoTrabajo;
 
     //Constructores
