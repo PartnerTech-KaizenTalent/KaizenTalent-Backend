@@ -124,7 +124,7 @@ public class PublicacionController {
         }
     }
 
-    private int ValidarPublicacion(@PathVariable("id_reclutador") Long id_reclutador,
+    private static int ValidarPublicacion(@PathVariable("id_reclutador") Long id_reclutador,
                                    @RequestBody PuestoTrabajo puestotrabajo,
                                    IUsuariosPuestosTrabajoService usuariosPuestosTrabajoService) {
 
@@ -155,5 +155,30 @@ public class PublicacionController {
                         )));
 
         return list_publicaciones.size();
+    }
+
+    @PutMapping("/publicacion/{id_publicacion}/update/estado/activo")
+    @PreAuthorize("hasRole('ROLE_RECLUTADOR')")
+    public ResponseEntity<?> UpdateEstadoPublicacionToActive(@PathVariable("id_publicacion") Long id_publicacion) {
+
+        Optional<PuestoTrabajo> publicacion_data = puestoTrabajoService.BuscarPuestoTrabajo_By_ID(id_publicacion);
+
+        if (publicacion_data.isPresent()) {
+
+            PuestoTrabajo publicacion = publicacion_data.get();
+
+            publicacion.setFechacaducidadPuestoTrabajo(
+                    LocalDateTime.now().plusDays(publicacion.getPeriodoactualPuestoTrabajo()));
+
+            publicacion.setEstadoPuestoTrabajo("Activo");
+
+            puestoTrabajoService.GuardarPuestoTrabajo(publicacion);
+
+            return new ResponseEntity<>(new MessageResponse("Estado del Puesto de Trabajo actualizada satisfactoriamente"),
+                    HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new MessageResponse("No se encontró información de la publicacion"),
+                    HttpStatus.NOT_FOUND);
+        }
     }
 }
