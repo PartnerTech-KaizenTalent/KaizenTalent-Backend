@@ -128,7 +128,7 @@ public class PublicacionController {
         }
     }
 
-    private static int ValidarPublicacion(Long id_reclutador, PuestoTrabajo puestotrabajo,
+    private int ValidarPublicacion(Long id_reclutador, PuestoTrabajo puestotrabajo,
                                    IUsuariosPuestosTrabajoService usuariosPuestosTrabajoService) {
 
         Set<PublicacionValidation> list_publicaciones = new HashSet<>();
