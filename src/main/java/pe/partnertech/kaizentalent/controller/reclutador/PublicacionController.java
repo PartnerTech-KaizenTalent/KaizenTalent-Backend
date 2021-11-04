@@ -128,8 +128,7 @@ public class PublicacionController {
         }
     }
 
-    private static int ValidarPublicacion(@PathVariable("id_reclutador") Long id_reclutador,
-                                   @RequestBody PuestoTrabajo puestotrabajo,
+    private static int ValidarPublicacion(Long id_reclutador, PuestoTrabajo puestotrabajo,
                                    IUsuariosPuestosTrabajoService usuariosPuestosTrabajoService) {
 
         Set<PublicacionValidation> list_publicaciones = new HashSet<>();
