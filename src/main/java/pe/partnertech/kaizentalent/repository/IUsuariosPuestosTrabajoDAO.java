@@ -29,7 +29,7 @@ public interface IUsuariosPuestosTrabajoDAO extends JpaRepository<UsuariosPuesto
             "pt.sueldoPuestoTrabajo LIKE ?7 AND " +
             "pt.experienciaPuestoTrabajo = ?8 AND " +
             "pt.periodoinicioPuestoTrabajo = ?9 AND " +
-            "pt.descripcionPuestoTrabajo LIKE ?10)
+            "pt.descripcionPuestoTrabajo LIKE ?10")
     Set<UsuariosPuestosTrabajo> findPublicacionesToValidate(Long id_reclutador,
                                                             String nombre_puestotrabajo,
                                                             String ciudad_puestotrabajo,
