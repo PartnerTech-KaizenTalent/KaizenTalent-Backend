@@ -157,6 +157,8 @@ public class PublicacionController {
                                 puestotrabajo.getDescripcionPuestoTrabajo()
                         )));
 
+        System.out.println("Cantidad de Items en Lista Validacion: " + list_publicaciones.size());
+        
         return list_publicaciones.size();
     }
 
