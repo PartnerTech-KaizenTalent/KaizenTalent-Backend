@@ -80,10 +80,10 @@ public class PublicacionController {
                 );
                 usuariosPuestosTrabajoService.GuardarUsuariosPuestosTrabajo(usuariosPuestosTrabajo);
 
-                return new ResponseEntity<>(new MessageResponse("Se ha publicado el Puesto de Trabajo satisfactoriamente"),
+                return new ResponseEntity<>(new MessageResponse("Se ha publicado el Puesto de Trabajo satisfactoriamente."),
                         HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(new MessageResponse("Ya se encuentra registrado el Puesto de Trabajo"),
+                return new ResponseEntity<>(new MessageResponse("Ya se encuentra registrado el Puesto de Trabajo."),
                         HttpStatus.CONFLICT);
             }
         } else {
@@ -115,14 +115,14 @@ public class PublicacionController {
 
                 puestoTrabajoService.GuardarPuestoTrabajo(publicacion);
 
-                return new ResponseEntity<>(new MessageResponse("Publicacion actualizada satisfactoriamente"),
+                return new ResponseEntity<>(new MessageResponse("Publicacion actualizada satisfactoriamente."),
                         HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(new MessageResponse("No se encontró información de la publicacion"),
+                return new ResponseEntity<>(new MessageResponse("No se encontró información de la publicación."),
                         HttpStatus.NOT_FOUND);
             }
         } else {
-            return new ResponseEntity<>(new MessageResponse("Ya se publicó un Puesto de Trabajo con dichos datos"),
+            return new ResponseEntity<>(new MessageResponse("Ya se publicó un Puesto de Trabajo con dichos datos."),
                     HttpStatus.CONFLICT);
         }
     }
@@ -174,7 +174,7 @@ public class PublicacionController {
 
             puestoTrabajoService.GuardarPuestoTrabajo(publicacion);
 
-            return new ResponseEntity<>(new MessageResponse("Estado del Puesto de Trabajo actualizada satisfactoriamente"),
+            return new ResponseEntity<>(new MessageResponse("Estado del Puesto de Trabajo actualizada satisfactoriamente."),
                     HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new MessageResponse("No se encontró información de la publicacion."),
@@ -202,7 +202,7 @@ public class PublicacionController {
 
             puestoTrabajoService.GuardarPuestoTrabajo(publicacion);
 
-            return new ResponseEntity<>(new MessageResponse("Estado del Puesto de Trabajo actualizada satisfactoriamente"),
+            return new ResponseEntity<>(new MessageResponse("Estado del Puesto de Trabajo actualizada satisfactoriamente."),
                     HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new MessageResponse("No se encontró información de la publicacion."),
@@ -210,7 +210,7 @@ public class PublicacionController {
         }
     }
 
-    @PostMapping("/publicacion/{id_publicacion}/refresh")
+    @PutMapping("/publicacion/{id_publicacion}/refresh")
     @PreAuthorize("hasRole('ROLE_RECLUTADOR')")
     public ResponseEntity<?> RefreshPublicacion(@PathVariable("id_publicacion") Long id_publicacion) {
 
@@ -244,7 +244,7 @@ public class PublicacionController {
             usuariosPuestosTrabajoService.EliminarUsuariosPuestosTrabajoByPuestoTrabajo(publicacion_data.get());
             puestoTrabajoService.EliminarPuestoTrabajo(id_publicacion);
 
-            return new ResponseEntity<>(new MessageResponse("Publicación eliminada satisfactoriamente"),
+            return new ResponseEntity<>(new MessageResponse("Publicación eliminada satisfactoriamente."),
                     HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new MessageResponse("Ocurrió un error al eliminar la publicación."),
