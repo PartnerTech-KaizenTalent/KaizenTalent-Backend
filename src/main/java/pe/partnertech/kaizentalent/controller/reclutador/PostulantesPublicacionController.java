@@ -8,13 +8,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.partnertech.kaizentalent.dto.response.general.DocumentoCVResponse;
+import pe.partnertech.kaizentalent.controller.util.util_code.Code_SendData;
 import pe.partnertech.kaizentalent.dto.response.general.ImagenResponse;
 import pe.partnertech.kaizentalent.dto.response.general.MessageResponse;
 import pe.partnertech.kaizentalent.dto.response.reclutador.PostulantesPublicacionResponse;
 import pe.partnertech.kaizentalent.dto.response.reclutador.PublicacionResponse;
 import pe.partnertech.kaizentalent.model.PuestoTrabajo;
 import pe.partnertech.kaizentalent.service.IPuestoTrabajoService;
+import pe.partnertech.kaizentalent.service.IUsuarioService;
 import pe.partnertech.kaizentalent.service.IUsuariosPuestosTrabajoService;
 
 import java.util.HashSet;
@@ -29,12 +30,16 @@ public class PostulantesPublicacionController {
     final
     IPuestoTrabajoService puestotrabajoService;
 
+    final IUsuarioService usuarioService;
+
     final
     IUsuariosPuestosTrabajoService usuariospuestostrabajoService;
 
     public PostulantesPublicacionController(IPuestoTrabajoService puestotrabajoService,
+                                            IUsuarioService usuarioService,
                                             IUsuariosPuestosTrabajoService usuariospuestostrabajoService) {
         this.puestotrabajoService = puestotrabajoService;
+        this.usuarioService = usuarioService;
         this.usuariospuestostrabajoService = usuariospuestostrabajoService;
     }
 
@@ -51,41 +56,19 @@ public class PostulantesPublicacionController {
             Set<PostulantesPublicacionResponse> list_postulantes = new HashSet<>();
 
             usuariospuestostrabajoService.BuscarPostulantes_By_IDPublicacion(id_publicacion).forEach(
-                    publicaciones -> {
-                        if (publicaciones.getUsuario().getDocumentoCVUsuario() != null) {
-                            list_postulantes.add(
-                                    new PostulantesPublicacionResponse(
-                                            publicaciones.getUsuario().getIdUsuario(),
-                                            publicaciones.getUsuario().getNombreUsuario() + " " +
-                                                    publicaciones.getUsuario().getApellidoUsuario(),
-                                            publicaciones.getUsuario().getTituloUsuario(),
-                                            publicaciones.getUsuario().getCiudadUsuario(),
-                                            new ImagenResponse(
-                                                    publicaciones.getUsuario().getImagenUsuario().getNombreImagen(),
-                                                    publicaciones.getUsuario().getImagenUsuario().getUrlImagen()
-                                            ),
-                                            new DocumentoCVResponse(
-                                                    publicaciones.getUsuario().getDocumentoCVUsuario().getNombreDocumentoCV(),
-                                                    publicaciones.getUsuario().getDocumentoCVUsuario().getUrlDocumentoCV()
-                                            )));
-                        } else {
-                            list_postulantes.add(
-                                    new PostulantesPublicacionResponse(
-                                            publicaciones.getUsuario().getIdUsuario(),
-                                            publicaciones.getUsuario().getNombreUsuario() + " " +
-                                                    publicaciones.getUsuario().getApellidoUsuario(),
-                                            publicaciones.getUsuario().getTituloUsuario(),
-                                            publicaciones.getUsuario().getCiudadUsuario(),
-                                            new ImagenResponse(
-                                                    publicaciones.getUsuario().getImagenUsuario().getNombreImagen(),
-                                                    publicaciones.getUsuario().getImagenUsuario().getUrlImagen()
-                                            ),
-                                            new DocumentoCVResponse(
-                                                    null,
-                                                    null
-                                            )));
-                        }
-                    });
+                    publicaciones -> list_postulantes.add(
+                            new PostulantesPublicacionResponse(
+                                    publicaciones.getUsuario().getIdUsuario(),
+                                    publicaciones.getUsuario().getNombreUsuario() + " " +
+                                            publicaciones.getUsuario().getApellidoUsuario(),
+                                    publicaciones.getUsuario().getTituloUsuario(),
+                                    publicaciones.getUsuario().getCiudadUsuario(),
+                                    new ImagenResponse(
+                                            publicaciones.getUsuario().getImagenUsuario().getNombreImagen(),
+                                            publicaciones.getUsuario().getImagenUsuario().getUrlImagen()
+                                    ),
+                                    Code_SendData.SendDocumentoCV(publicaciones.getUsuario().getIdUsuario(), usuarioService)
+                            )));
 
             return new ResponseEntity<>(new PublicacionResponse(publicacion.getNombrePuestoTrabajo(), list_postulantes),
                     HttpStatus.OK);

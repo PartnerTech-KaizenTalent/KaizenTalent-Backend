@@ -4,10 +4,6 @@
 
 package pe.partnertech.kaizentalent.service;
 
-import pe.partnertech.kaizentalent.model.Conocimiento;
-
-import java.util.Set;
-
 public interface IConocimientoService {
 
     //Set<Conocimiento>
