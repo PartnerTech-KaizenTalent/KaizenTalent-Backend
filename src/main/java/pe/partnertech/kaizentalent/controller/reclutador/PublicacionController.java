@@ -17,10 +17,13 @@ import pe.partnertech.kaizentalent.service.IUsuarioService;
 import pe.partnertech.kaizentalent.service.IUsuariosPuestosTrabajoService;
 import pe.partnertech.kaizentalent.validation.PublicacionValidation;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @RestController
 @RequestMapping("/api")
@@ -174,7 +177,76 @@ public class PublicacionController {
             return new ResponseEntity<>(new MessageResponse("Estado del Puesto de Trabajo actualizada satisfactoriamente"),
                     HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new MessageResponse("No se encontró información de la publicacion"),
+            return new ResponseEntity<>(new MessageResponse("No se encontró información de la publicacion."),
+                    HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/publicacion/{id_publicacion}/update/estado/pausa")
+    @PreAuthorize("hasRole('ROLE_RECLUTADOR')")
+    public ResponseEntity<?> UpdateEstadoPublicacionToPause(@PathVariable("id_publicacion") Long id_publicacion) {
+
+        Optional<PuestoTrabajo> publicacion_data = puestoTrabajoService.BuscarPuestoTrabajo_By_ID(id_publicacion);
+
+        if (publicacion_data.isPresent()) {
+
+            PuestoTrabajo publicacion = publicacion_data.get();
+
+            LocalDate fecha_caducidad = publicacion.getFechacaducidadPuestoTrabajo().toLocalDate();
+
+            long diferencia_fechas = DAYS.between(LocalDate.now(), fecha_caducidad);
+
+            publicacion.setPeriodoactualPuestoTrabajo((int) diferencia_fechas);
+
+            publicacion.setEstadoPuestoTrabajo("En Pausa");
+
+            puestoTrabajoService.GuardarPuestoTrabajo(publicacion);
+
+            return new ResponseEntity<>(new MessageResponse("Estado del Puesto de Trabajo actualizada satisfactoriamente"),
+                    HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new MessageResponse("No se encontró información de la publicacion."),
+                    HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/publicacion/{id_publicacion}/refresh")
+    @PreAuthorize("hasRole('ROLE_RECLUTADOR')")
+    public ResponseEntity<?> RefreshPublicacion(@PathVariable("id_publicacion") Long id_publicacion) {
+
+        Optional<PuestoTrabajo> publicacion_data = puestoTrabajoService.BuscarPuestoTrabajo_By_ID(id_publicacion);
+
+        if (publicacion_data.isPresent()) {
+            PuestoTrabajo publicacion = publicacion_data.get();
+
+            publicacion.setEstadoPuestoTrabajo("Activo");
+            publicacion.setPeriodoactualPuestoTrabajo(publicacion.getPeriodoinicioPuestoTrabajo());
+            publicacion.setFechacaducidadPuestoTrabajo(LocalDateTime.now().plusDays(publicacion.getPeriodoinicioPuestoTrabajo()));
+
+            puestoTrabajoService.GuardarPuestoTrabajo(publicacion);
+
+            return new ResponseEntity<>(new MessageResponse("Se ha publicado nuevamente el Puesto de Trabajo " +
+                    "satisfactoriamente."),
+                    HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new MessageResponse("Ocurrió un error publicar nuevamente el Puesto de Trabajo."),
+                    HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/publicacion/{id_publicacion}/delete")
+    @PreAuthorize("hasRole('ROLE_RECLUTADOR')")
+    public ResponseEntity<?> EliminarPuestoTrabajo(@PathVariable("id_publicacion") Long id_publicacion) {
+
+        Optional<PuestoTrabajo> publicacion_data = puestoTrabajoService.BuscarPuestoTrabajo_By_ID(id_publicacion);
+
+        if (publicacion_data.isPresent()) {
+            puestoTrabajoService.EliminarPuestoTrabajo(id_publicacion);
+
+            return new ResponseEntity<>(new MessageResponse("Publicación eliminada satisfactoriamente"),
+                    HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new MessageResponse("Ocurrió un error al eliminar la publicación."),
                     HttpStatus.NOT_FOUND);
         }
     }
