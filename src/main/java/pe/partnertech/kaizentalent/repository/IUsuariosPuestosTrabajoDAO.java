@@ -45,8 +45,8 @@ public interface IUsuariosPuestosTrabajoDAO extends JpaRepository<UsuariosPuesto
             "JOIN PuestoTrabajo pt ON upt.puestotrabajo.idPuestoTrabajo = pt.idPuestoTrabajo " +
             "JOIN Usuario u ON upt.usuario.idUsuario = u.idUsuario " +
             "JOIN Imagen i ON u.imagenUsuario.idImagen = i.idImagen " +
-            "JOIN DocumentoCV dcv ON u.documentoCVUsuario.idDocumentoCV = dcv.idDocumentoCV " +
             "WHERE pt.estadoPuestoTrabajo LIKE 'Activo' " +
+            "AND upt.usuario.idUsuario = u.idUsuario " +
             "AND u.tipodocumentoUsuario LIKE 'RUC' " +
             "ORDER BY pt.fecharegistroPuestoTrabajo DESC")
     Set<UsuariosPuestosTrabajo> findPublicaciones();
@@ -55,7 +55,6 @@ public interface IUsuariosPuestosTrabajoDAO extends JpaRepository<UsuariosPuesto
             "JOIN PuestoTrabajo pt ON upt.puestotrabajo.idPuestoTrabajo = pt.idPuestoTrabajo " +
             "JOIN Usuario u ON upt.usuario.idUsuario = u.idUsuario " +
             "JOIN Imagen i ON u.imagenUsuario.idImagen = i.idImagen " +
-            "JOIN DocumentoCV dcv ON u.documentoCVUsuario.idDocumentoCV = dcv.idDocumentoCV " +
             "WHERE pt.estadoPuestoTrabajo LIKE 'Activo' " +
             "AND upt.usuario.idUsuario = u.idUsuario " +
             "AND u.tipodocumentoUsuario LIKE 'RUC' " +
