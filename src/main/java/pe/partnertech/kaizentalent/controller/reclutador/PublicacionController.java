@@ -51,34 +51,7 @@ public class PublicacionController {
         Optional<Usuario> reclutador_data = usuarioService.BuscarUsuario_By_IDUsuario(id_reclutador);
 
         if (reclutador_data.isPresent()) {
-
-            Set<PublicacionValidation> list_publicaciones = new HashSet<>();
-
-            usuariosPuestosTrabajoService.ValidarPublicaciones(id_reclutador,
-                    puestotrabajo.getNombrePuestoTrabajo(),
-                    puestotrabajo.getCiudadPuestoTrabajo(),
-                    puestotrabajo.getCategoriaPuestoTrabajo(),
-                    puestotrabajo.getModalidadPuestoTrabajo(),
-                    puestotrabajo.getTipojornadaPuestoTrabajo(),
-                    puestotrabajo.getSueldoPuestoTrabajo(),
-                    puestotrabajo.getExperienciaPuestoTrabajo(),
-                    puestotrabajo.getPeriodoinicioPuestoTrabajo(),
-                    puestotrabajo.getDescripcionPuestoTrabajo()).forEach(
-                    publicacion_validate -> list_publicaciones.add(
-                            new PublicacionValidation(
-                                    id_reclutador,
-                                    puestotrabajo.getNombrePuestoTrabajo(),
-                                    puestotrabajo.getCiudadPuestoTrabajo(),
-                                    puestotrabajo.getCategoriaPuestoTrabajo(),
-                                    puestotrabajo.getModalidadPuestoTrabajo(),
-                                    puestotrabajo.getTipojornadaPuestoTrabajo(),
-                                    puestotrabajo.getSueldoPuestoTrabajo(),
-                                    puestotrabajo.getExperienciaPuestoTrabajo(),
-                                    puestotrabajo.getPeriodoinicioPuestoTrabajo(),
-                                    puestotrabajo.getDescripcionPuestoTrabajo()
-                            )));
-
-            if (list_publicaciones.size() < 1) {
+            if (ValidatePublicacion(id_reclutador, puestotrabajo) < 1) {
                 Usuario reclutador = reclutador_data.get();
 
                 //Datos de Publicacion
@@ -122,33 +95,7 @@ public class PublicacionController {
                                                  @PathVariable("id_publicacion") Long id_publicacion,
                                                  @RequestBody PuestoTrabajo puestotrabajo) {
 
-        Set<PublicacionValidation> list_publicaciones = new HashSet<>();
-
-        usuariosPuestosTrabajoService.ValidarPublicaciones(id_reclutador,
-                puestotrabajo.getNombrePuestoTrabajo(),
-                puestotrabajo.getCiudadPuestoTrabajo(),
-                puestotrabajo.getCategoriaPuestoTrabajo(),
-                puestotrabajo.getModalidadPuestoTrabajo(),
-                puestotrabajo.getTipojornadaPuestoTrabajo(),
-                puestotrabajo.getSueldoPuestoTrabajo(),
-                puestotrabajo.getExperienciaPuestoTrabajo(),
-                puestotrabajo.getPeriodoinicioPuestoTrabajo(),
-                puestotrabajo.getDescripcionPuestoTrabajo()).forEach(
-                publicacion_validate -> list_publicaciones.add(
-                        new PublicacionValidation(
-                                id_reclutador,
-                                puestotrabajo.getNombrePuestoTrabajo(),
-                                puestotrabajo.getCiudadPuestoTrabajo(),
-                                puestotrabajo.getCategoriaPuestoTrabajo(),
-                                puestotrabajo.getModalidadPuestoTrabajo(),
-                                puestotrabajo.getTipojornadaPuestoTrabajo(),
-                                puestotrabajo.getSueldoPuestoTrabajo(),
-                                puestotrabajo.getExperienciaPuestoTrabajo(),
-                                puestotrabajo.getPeriodoinicioPuestoTrabajo(),
-                                puestotrabajo.getDescripcionPuestoTrabajo()
-                        )));
-
-        if (list_publicaciones.size() < 1) {
+        if (ValidatePublicacion(id_reclutador, puestotrabajo) < 1) {
             Optional<PuestoTrabajo> publicacion_data = puestoTrabajoService.BuscarPuestoTrabajo_By_ID(id_publicacion);
 
             if (publicacion_data.isPresent()) {
@@ -175,6 +122,36 @@ public class PublicacionController {
             return new ResponseEntity<>(new MessageResponse("Ya se publicó un Puesto de Trabajo con dichos datos"),
                     HttpStatus.CONFLICT);
         }
+    }
+
+    private int ValidatePublicacion(Long id_reclutador, PuestoTrabajo puestotrabajo) {
+        Set<PublicacionValidation> list_publicaciones = new HashSet<>();
+
+        usuariosPuestosTrabajoService.ValidarPublicaciones(id_reclutador,
+                puestotrabajo.getNombrePuestoTrabajo(),
+                puestotrabajo.getCiudadPuestoTrabajo(),
+                puestotrabajo.getCategoriaPuestoTrabajo(),
+                puestotrabajo.getModalidadPuestoTrabajo(),
+                puestotrabajo.getTipojornadaPuestoTrabajo(),
+                puestotrabajo.getSueldoPuestoTrabajo(),
+                puestotrabajo.getExperienciaPuestoTrabajo(),
+                puestotrabajo.getPeriodoinicioPuestoTrabajo(),
+                puestotrabajo.getDescripcionPuestoTrabajo()).forEach(
+                publicacion_validate -> list_publicaciones.add(
+                        new PublicacionValidation(
+                                id_reclutador,
+                                puestotrabajo.getNombrePuestoTrabajo(),
+                                puestotrabajo.getCiudadPuestoTrabajo(),
+                                puestotrabajo.getCategoriaPuestoTrabajo(),
+                                puestotrabajo.getModalidadPuestoTrabajo(),
+                                puestotrabajo.getTipojornadaPuestoTrabajo(),
+                                puestotrabajo.getSueldoPuestoTrabajo(),
+                                puestotrabajo.getExperienciaPuestoTrabajo(),
+                                puestotrabajo.getPeriodoinicioPuestoTrabajo(),
+                                puestotrabajo.getDescripcionPuestoTrabajo()
+                        )));
+
+        return list_publicaciones.size();
     }
 
     @PutMapping("/publicacion/{id_publicacion}/update/estado/activo")
