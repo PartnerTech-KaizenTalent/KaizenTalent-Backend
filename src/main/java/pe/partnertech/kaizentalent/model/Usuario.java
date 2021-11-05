@@ -91,6 +91,15 @@ public class Usuario implements Serializable {
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "usuarioUtilityToken")
     private Set<UtilityToken> utilitytokensUsuario;
 
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "usuarioConocimiento")
+    private Set<Conocimiento> conocimientosUsuario;
+
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "usuarioEducacion")
+    private Set<Educacion> educacionesUsuario;
+
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "usuarioExperienciaLaboral")
+    private Set<ExperienciaLaboral> experienciaslaboralesUsuario;
+
     @OneToMany(mappedBy = "usuario")
     private Set<UsuariosPuestosTrabajo> puestostrabajoUsuario;
 
@@ -309,6 +318,30 @@ public class Usuario implements Serializable {
 
     public void setUtilitytokensUsuario(Set<UtilityToken> utilitytokensUsuario) {
         this.utilitytokensUsuario = utilitytokensUsuario;
+    }
+
+    public Set<Conocimiento> getConocimientosUsuario() {
+        return conocimientosUsuario;
+    }
+
+    public void setConocimientosUsuario(Set<Conocimiento> conocimientosUsuario) {
+        this.conocimientosUsuario = conocimientosUsuario;
+    }
+
+    public Set<Educacion> getEducacionesUsuario() {
+        return educacionesUsuario;
+    }
+
+    public void setEducacionesUsuario(Set<Educacion> educacionesUsuario) {
+        this.educacionesUsuario = educacionesUsuario;
+    }
+
+    public Set<ExperienciaLaboral> getExperienciaslaboralesUsuario() {
+        return experienciaslaboralesUsuario;
+    }
+
+    public void setExperienciaslaboralesUsuario(Set<ExperienciaLaboral> experienciaslaboralesUsuario) {
+        this.experienciaslaboralesUsuario = experienciaslaboralesUsuario;
     }
 
     public Set<UsuariosPuestosTrabajo> getPuestostrabajoUsuario() {

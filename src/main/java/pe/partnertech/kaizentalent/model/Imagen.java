@@ -37,16 +37,33 @@ public class Imagen implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario"))
     private Usuario usuarioImagen;
 
+    @OneToOne
+    @JoinTable(name = "experiencialaboral_imagen",
+            joinColumns = @JoinColumn(name = "id_imagen", referencedColumnName = "id_imagen"),
+            inverseJoinColumns = @JoinColumn(name = "id_experiencialaboral", referencedColumnName = "id_experiencialaboral"))
+    private ExperienciaLaboral experiencialaboralImagen;
+
     //Constructores
     public Imagen() {
     }
 
+    //Imagen To User
     public Imagen(String nombreImagen, String tipoarchivoImagen, String urlImagen, byte[] archivoImagen, Usuario usuarioImagen) {
         this.nombreImagen = nombreImagen;
         this.tipoarchivoImagen = tipoarchivoImagen;
         this.urlImagen = urlImagen;
         this.archivoImagen = archivoImagen;
         this.usuarioImagen = usuarioImagen;
+    }
+
+    //Imagen To Experiencia Laboral
+    public Imagen(String nombreImagen, String tipoarchivoImagen, String urlImagen, byte[] archivoImagen,
+                  ExperienciaLaboral experiencialaboralImagen) {
+        this.nombreImagen = nombreImagen;
+        this.tipoarchivoImagen = tipoarchivoImagen;
+        this.urlImagen = urlImagen;
+        this.archivoImagen = archivoImagen;
+        this.experiencialaboralImagen = experiencialaboralImagen;
     }
 
     //Getters y Setters
@@ -96,5 +113,13 @@ public class Imagen implements Serializable {
 
     public void setUsuarioImagen(Usuario usuarioImagen) {
         this.usuarioImagen = usuarioImagen;
+    }
+
+    public ExperienciaLaboral getExperiencialaboralImagen() {
+        return experiencialaboralImagen;
+    }
+
+    public void setExperiencialaboralImagen(ExperienciaLaboral experiencialaboralImagen) {
+        this.experiencialaboralImagen = experiencialaboralImagen;
     }
 }
