@@ -8,7 +8,9 @@ public class SkillValidation {
 
     //Atributos
     private Long idPostulante;
+
     private String nombreSkill;
+
     private String nivelSkill;
 
     //Constructores

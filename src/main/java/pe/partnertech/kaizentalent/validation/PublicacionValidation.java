@@ -8,14 +8,23 @@ public class PublicacionValidation {
 
     //Atributos
     private Long id_reclutador;
+
     private String nombre_puestotrabajo;
+
     private String ciudad_puestotrabajo;
+
     private String categoria_puestotrabajo;
+
     private String modalidad_puestotrabajo;
+
     private String tipojornada_puestotrabajo;
+
     private String sueldo_puestotrabajo;
+
     private int experiencia_puestotrabajo;
+
     private int periodoinicio_puestotrabajo;
+
     private String descripcion_puestotrabajo;
 
     //Constructores

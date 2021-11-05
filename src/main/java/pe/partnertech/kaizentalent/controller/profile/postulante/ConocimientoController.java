@@ -107,7 +107,6 @@ public class ConocimientoController {
 
                 return new ResponseEntity<>(new MessageResponse("Conocimiento actualizado satisfactoriamente."),
                         HttpStatus.OK);
-
             } else {
                 return new ResponseEntity<>(new MessageResponse("No se encontró información del Conocimiento."),
                         HttpStatus.NOT_FOUND);
