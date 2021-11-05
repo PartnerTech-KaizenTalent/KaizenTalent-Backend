@@ -147,8 +147,8 @@ public class SignupPostulanteController {
                             postulante.setEstadoUsuario("PENDIENTE");
 
                             //Asignando Foto por Defecto: Postulante
-                            InputStream fotoStream = getClass().getResourceAsStream("/static/img/PostulanteUser.png");
-                            Code_UploadFoto.AssignImagen(postulante, fotoStream, imagenService, "/photos/");
+                            InputStream fotoStream = getClass().getResourceAsStream("/static/img/DefaultPhoto.png");
+                            Code_UploadFoto.AssignImagenToUser(postulante, fotoStream, imagenService, "/photos/");
 
                             String token = RandomString.make(50);
 

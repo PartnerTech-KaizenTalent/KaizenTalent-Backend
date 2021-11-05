@@ -6,12 +6,8 @@ package pe.partnertech.kaizentalent.tools;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import pe.partnertech.kaizentalent.model.PuestoTrabajo;
-import pe.partnertech.kaizentalent.model.Usuario;
-import pe.partnertech.kaizentalent.model.UtilityToken;
-import pe.partnertech.kaizentalent.service.IPuestoTrabajoService;
-import pe.partnertech.kaizentalent.service.IUsuarioService;
-import pe.partnertech.kaizentalent.service.IUtilityTokenService;
+import pe.partnertech.kaizentalent.model.*;
+import pe.partnertech.kaizentalent.service.*;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -31,11 +27,20 @@ public class MaintainceKaizenTalent {
     final
     IUtilityTokenService utilityTokenService;
 
+    final
+    IExperienciaLaboralService experienciaLaboralService;
+
+    final
+    IImagenService imagenService;
+
     public MaintainceKaizenTalent(IUsuarioService usuarioService, IPuestoTrabajoService puestoTrabajoService,
-                                  IUtilityTokenService utilityTokenService) {
+                                  IUtilityTokenService utilityTokenService,
+                                  IExperienciaLaboralService experienciaLaboralService, IImagenService imagenService) {
         this.usuarioService = usuarioService;
         this.puestoTrabajoService = puestoTrabajoService;
         this.utilityTokenService = utilityTokenService;
+        this.experienciaLaboralService = experienciaLaboralService;
+        this.imagenService = imagenService;
     }
 
     @Scheduled(fixedRate = 60000)
@@ -45,6 +50,8 @@ public class MaintainceKaizenTalent {
 
         for (PuestoTrabajo puestotrabajo : lista_publicaciones) {
             puestotrabajo.setEstadoPuestoTrabajo("No Activo");
+
+            puestoTrabajoService.GuardarPuestoTrabajo(puestotrabajo);
         }
     }
 
@@ -79,6 +86,27 @@ public class MaintainceKaizenTalent {
         }
     }
 
+    @Scheduled(fixedRate = 60000)
+    public void ActualizarLogoEmpresa() {
+        Set<Usuario> list_empresas = usuarioService.MostrarEmpresas();
 
-    //TODO: Actualizar Logo Empresa
+        for (Usuario empresa : list_empresas) {
+            String nombre_empresa = empresa.getNombreUsuario();
+
+            Set<ExperienciaLaboral> list_experienciaslaborales =
+                    experienciaLaboralService.BuscarExperienciasLaborales_By_Empresa(nombre_empresa);
+
+            for (ExperienciaLaboral experiencialaboral : list_experienciaslaborales) {
+                Optional<Imagen> logo_data =
+                        imagenService.BuscarImagen_By_ID(experiencialaboral.getImagenExperienciaLaboral().getIdImagen());
+
+                if (logo_data.isPresent()) {
+                    Imagen logo_empresa = logo_data.get();
+
+                    logo_empresa.setArchivoImagen(empresa.getImagenUsuario().getArchivoImagen());
+                    imagenService.GuardarImagen(logo_empresa);
+                }
+            }
+        }
+    }
 }

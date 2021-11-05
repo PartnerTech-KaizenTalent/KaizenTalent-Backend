@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pe.partnertech.kaizentalent.controller.util.util_code.Code_Format;
 import pe.partnertech.kaizentalent.dto.response.PublicacionesIndexResponse;
 import pe.partnertech.kaizentalent.dto.response.general.ImagenResponse;
 import pe.partnertech.kaizentalent.service.IUsuariosPuestosTrabajoService;
@@ -42,7 +43,7 @@ public class IndexController {
                                 publicaciones.getPuestotrabajo().getCiudadPuestoTrabajo(),
                                 FormatSueldo(publicaciones.getPuestotrabajo().getSueldoPuestoTrabajo()),
                                 publicaciones.getPuestotrabajo().getTipojornadaPuestoTrabajo(),
-                                FormatExperienciaLaboral(publicaciones.getPuestotrabajo().getExperienciaPuestoTrabajo()),
+                                Code_Format.FormatExperienciaLaboral(publicaciones.getPuestotrabajo().getExperienciaPuestoTrabajo()),
                                 publicaciones.getUsuario().getNombreUsuario(),
                                 publicaciones.getPuestotrabajo().getModalidadPuestoTrabajo(),
                                 publicaciones.getPuestotrabajo().getFecharegistroPuestoTrabajo(),
@@ -52,26 +53,6 @@ public class IndexController {
                         )));
 
         return new ResponseEntity<>(list_publicaciones, HttpStatus.OK);
-    }
-
-    String FormatExperienciaLaboral(int experiencia) {
-        String experiencia_laboral;
-
-        if (experiencia == 0) {
-            experiencia_laboral = "Sin Experiencia";
-        } else if (experiencia == 3) {
-            experiencia_laboral = "3 Meses";
-        } else if (experiencia == 6) {
-            experiencia_laboral = "6 Meses";
-        } else if (experiencia == 12) {
-            experiencia_laboral = "1 Año";
-        } else if (experiencia > 12) {
-            experiencia_laboral = (experiencia / 12) + " Años";
-        } else {
-            experiencia_laboral = "";
-        }
-
-        return experiencia_laboral;
     }
 
     String FormatSueldo(String sueldo) {

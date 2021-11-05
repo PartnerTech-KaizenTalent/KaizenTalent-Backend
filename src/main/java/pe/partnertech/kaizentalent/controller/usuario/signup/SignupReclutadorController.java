@@ -140,8 +140,8 @@ public class SignupReclutadorController {
                             reclutador.setEstadoUsuario("PENDIENTE");
 
                             //Asignando Foto por Defecto: Reclutador
-                            InputStream fotoStream = getClass().getResourceAsStream("/static/img/ReclutadorUser.png");
-                            Code_UploadFoto.AssignImagen(reclutador, fotoStream, imagenService, "/logos/");
+                            InputStream fotoStream = getClass().getResourceAsStream("/static/img/DefaultLogo.png");
+                            Code_UploadFoto.AssignImagenToUser(reclutador, fotoStream, imagenService, "/logos/");
 
                             String token = RandomString.make(50);
 
