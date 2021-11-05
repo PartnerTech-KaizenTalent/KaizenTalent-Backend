@@ -67,7 +67,7 @@ public class ConocimientoController {
                         "Conocimiento."),
                         HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(new MessageResponse("Ya se encuentra registrado esa Conocimiento."),
+                return new ResponseEntity<>(new MessageResponse("Ya se encuentra registrado ese Conocimiento."),
                         HttpStatus.CONFLICT);
             }
         } else {
@@ -82,38 +82,45 @@ public class ConocimientoController {
                                                           @PathVariable("id_conocimiento") Long id_conocimiento,
                                                           @RequestBody Conocimiento conocimiento) {
 
-        Set<SkillValidation> list_skills = new HashSet<>();
+        Optional<Usuario> postulante_data = usuarioService.BuscarUsuario_By_IDUsuario(id_postulante);
 
-        conocimientoService.ValidarConocimientos(id_postulante, conocimiento.getNombreConocimiento(),
-                conocimiento.getNivelConocimiento()).forEach(
-                conocimientos -> list_skills.add(
-                        new SkillValidation(
-                                id_postulante,
-                                conocimiento.getNombreConocimiento(),
-                                conocimiento.getNivelConocimiento()
-                        )));
+        if (postulante_data.isPresent()) {
+            Set<SkillValidation> list_skills = new HashSet<>();
 
-        if (list_skills.size() < 1) {
-            Optional<Conocimiento> conocimiento_data =
-                    conocimientoService.BuscarConocimiento_By_IDConocimiento(id_conocimiento);
+            conocimientoService.ValidarConocimientos(id_postulante, conocimiento.getNombreConocimiento(),
+                    conocimiento.getNivelConocimiento()).forEach(
+                    conocimientos -> list_skills.add(
+                            new SkillValidation(
+                                    id_postulante,
+                                    conocimiento.getNombreConocimiento(),
+                                    conocimiento.getNivelConocimiento()
+                            )));
 
-            if (conocimiento_data.isPresent()) {
-                Conocimiento conocimiento_update = conocimiento_data.get();
+            if (list_skills.size() < 1) {
+                Optional<Conocimiento> conocimiento_data =
+                        conocimientoService.BuscarConocimiento_By_IDConocimiento(id_conocimiento);
 
-                conocimiento_update.setNombreConocimiento(conocimiento.getNombreConocimiento());
-                conocimiento_update.setNivelConocimiento(conocimiento.getNivelConocimiento());
+                if (conocimiento_data.isPresent()) {
+                    Conocimiento conocimiento_update = conocimiento_data.get();
 
-                conocimientoService.GuardarConocimiento(conocimiento_update);
+                    conocimiento_update.setNombreConocimiento(conocimiento.getNombreConocimiento());
+                    conocimiento_update.setNivelConocimiento(conocimiento.getNivelConocimiento());
 
-                return new ResponseEntity<>(new MessageResponse("Conocimiento actualizado satisfactoriamente."),
-                        HttpStatus.OK);
+                    conocimientoService.GuardarConocimiento(conocimiento_update);
+
+                    return new ResponseEntity<>(new MessageResponse("Conocimiento actualizado satisfactoriamente."),
+                            HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>(new MessageResponse("No se encontró información del Conocimiento."),
+                            HttpStatus.NOT_FOUND);
+                }
             } else {
-                return new ResponseEntity<>(new MessageResponse("No se encontró información del Conocimiento."),
-                        HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(new MessageResponse("Ya se encuentra registrado un Conocimiento con dichos datos."),
+                        HttpStatus.CONFLICT);
             }
         } else {
-            return new ResponseEntity<>(new MessageResponse("Ya se encuentra registrado un Conocimiento con dichos datos."),
-                    HttpStatus.CONFLICT);
+            return new ResponseEntity<>(new MessageResponse("No se encuentra la información del Usuario."),
+                    HttpStatus.NOT_FOUND);
         }
     }
 

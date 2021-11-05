@@ -6,13 +6,11 @@ package pe.partnertech.kaizentalent.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.partnertech.kaizentalent.controller.util.util_code.Code_Format;
 import pe.partnertech.kaizentalent.dto.response.DetailPuestoTrabajoResponse;
 import pe.partnertech.kaizentalent.dto.response.general.ImagenResponse;
 import pe.partnertech.kaizentalent.dto.response.general.MessageResponse;
-import pe.partnertech.kaizentalent.model.Usuario;
 import pe.partnertech.kaizentalent.model.UsuariosPuestosTrabajo;
 import pe.partnertech.kaizentalent.service.IUsuarioService;
 import pe.partnertech.kaizentalent.service.IUsuariosPuestosTrabajoService;
@@ -41,30 +39,10 @@ public class DetailPublicacionController {
     @GetMapping("/publicacion/{id_publicacion}/detail")
     ResponseEntity<?> FindDetailPuestoTrabajo(@PathVariable("id_publicacion") Long id_publicacion) {
 
-        return DetallePublicacion(id_publicacion);
-    }
-
-    @GetMapping("/reclutador/{id_reclutador}/publicacion/{id_publicacion}/detail")
-    @PreAuthorize("hasRole('ROLE_RECLUTADOR')")
-    ResponseEntity<?> FindPublicacionDetailPuestoTrabajo(@PathVariable("id_reclutador") Long id_reclutador,
-                                                         @PathVariable("id_publicacion") Long id_publicacion) {
-
-        Optional<Usuario> reclutador_data = usuarioService.BuscarUsuario_By_IDUsuario(id_reclutador);
-
-        if (reclutador_data.isPresent()) {
-            return DetallePublicacion(id_publicacion);
-        } else {
-            return new ResponseEntity<>(new MessageResponse("No se encuentra la información del usuario."),
-                    HttpStatus.NOT_FOUND);
-        }
-    }
-
-    private ResponseEntity<?> DetallePublicacion(@PathVariable("id_publicacion") Long id_publicacion) {
         Optional<UsuariosPuestosTrabajo> publicacion_data =
                 usuariosPuestosTrabajoService.BuscarPublicacion_By_IDPublicacion(id_publicacion);
 
         if (publicacion_data.isPresent()) {
-
             UsuariosPuestosTrabajo detalle_publicacion = publicacion_data.get();
 
             LocalDateTime fecha_registro = detalle_publicacion.getPuestotrabajo().getFecharegistroPuestoTrabajo();
