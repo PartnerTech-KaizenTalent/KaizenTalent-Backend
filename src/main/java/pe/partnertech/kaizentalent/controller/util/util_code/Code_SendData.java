@@ -201,7 +201,7 @@ public class Code_SendData {
                                                 referenciaslaborales.getReferenteReferenciaLaboral(),
                                                 referenciaslaborales.getEmailreferenteReferenciaLaboral(),
                                                 referenciaslaborales.getTelefonoreferenteReferenciaLaboral(),
-                                                ConvierteMes(referenciaslaborales.getMesinicioExperienciaLaboral()),
+                                                ConvierteMes(referenciaslaborales.getMesinicioExperienciaLaboral()) + " " +
                                                 referenciaslaborales.getAnioinicioExperienciaLaboral(),
                                                 new ImagenResponse(referenciaslaborales.getImagenExperienciaLaboral().getNombreImagen(),
                                                         referenciaslaborales.getImagenExperienciaLaboral().getUrlImagen())
