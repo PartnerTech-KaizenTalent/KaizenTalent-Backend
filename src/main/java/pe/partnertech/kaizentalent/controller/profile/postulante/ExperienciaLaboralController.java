@@ -206,6 +206,7 @@ public class ExperienciaLaboralController {
                 experienciaLaboralService.BuscarExperienciaLaboral_By_IDExperienciaLaboral(id_experiencialaboral);
 
         if (experiencialaboral_data.isPresent()) {
+
             experienciaLaboralService.EliminarExperienciaLaboral(id_experiencialaboral);
 
             return new ResponseEntity<>(new MessageResponse("Se ha eliminado la Experiencia Laboral satisfactoriamente."),
