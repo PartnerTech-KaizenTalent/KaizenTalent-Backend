@@ -172,9 +172,6 @@ public class SignupPostulanteController {
                                     "más de 72 horas para culminar dicho proceso. De lo contrario, deberá rellenar el " +
                                     "formulario nuevamente."),
                                     HttpStatus.OK);
-
-                            //TODO: Conocimiento, Educacion, Experiencia Laboral
-
                         } else {
                             return new ResponseEntity<>(new MessageResponse("Ocurrió un error durante el proceso " +
                                     "de registro de datos."),

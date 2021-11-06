@@ -59,7 +59,7 @@ public class HabilidadController {
 
             if (list_habilidades.size() < 1) {
                 //Asignando Postulante
-                habilidad.setUsuarioHabilidades(postulante);
+                habilidad.setUsuarioHabilidad(postulante);
 
                 habilidadService.GuardarHabilidad(habilidad);
 
