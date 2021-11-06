@@ -54,7 +54,7 @@ public class ExperienciaLaboral implements Serializable {
 
     @ManyToOne
     @JoinTable(name = "usuario_experienciaslaborales",
-            joinColumns = @JoinColumn(name = "id_conocimiento", referencedColumnName = "id_conocimiento"),
+            joinColumns = @JoinColumn(name = "id_experiencialaboral", referencedColumnName = "id_experiencialaboral"),
             inverseJoinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario"))
     private Usuario usuarioExperienciaLaboral;
 
