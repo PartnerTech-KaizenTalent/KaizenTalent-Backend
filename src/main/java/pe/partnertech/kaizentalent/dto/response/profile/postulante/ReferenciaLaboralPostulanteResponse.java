@@ -23,13 +23,16 @@ public class ReferenciaLaboralPostulanteResponse {
 
     private ImagenResponse logoEmpresa;
 
+    private String mesInicio;
+
     //Constructores
     public ReferenciaLaboralPostulanteResponse() {
     }
 
     public ReferenciaLaboralPostulanteResponse(String empresaReferente, String nombreReferente, String emailReferente,
                                                String telefonoReferente, String mesinicioExperienciaLaboral,
-                                               String anioinicioExperienciaLaboral, ImagenResponse logoEmpresa) {
+                                               String anioinicioExperienciaLaboral, ImagenResponse logoEmpresa,
+                                               String mesInicio) {
         this.empresaReferente = empresaReferente;
         this.nombreReferente = nombreReferente;
         this.emailReferente = emailReferente;
@@ -37,6 +40,7 @@ public class ReferenciaLaboralPostulanteResponse {
         this.mesinicioExperienciaLaboral = mesinicioExperienciaLaboral;
         this.anioinicioExperienciaLaboral = anioinicioExperienciaLaboral;
         this.logoEmpresa = logoEmpresa;
+        this.mesInicio = mesInicio;
     }
 
     //Getters y Setters
@@ -94,5 +98,13 @@ public class ReferenciaLaboralPostulanteResponse {
 
     public void setLogoEmpresa(ImagenResponse logoEmpresa) {
         this.logoEmpresa = logoEmpresa;
+    }
+
+    public String getMesInicio() {
+        return mesInicio;
+    }
+
+    public void setMesInicio(String mesInicio) {
+        this.mesInicio = mesInicio;
     }
 }
