@@ -226,56 +226,38 @@ public class Code_SendData {
 
         switch (mestoconvert) {
             case "1":
-                mesformateado = "Enero";
-                break;
-            case "2":
-                mesformateado = "Febrero";
-                break;
-            case "3":
-                mesformateado = "Marzo";
-                break;
-            case "4":
-                mesformateado = "Abril";
-                break;
-            case "5":
-                mesformateado = "Mayo";
-                break;
-            case "6":
-                mesformateado = "Junio";
-                break;
-            case "7":
-                mesformateado = "Julio";
-                break;
-            case "8":
-                mesformateado = "Agosto";
-                break;
-            case "9":
-                mesformateado = "Septiembre";
-                break;
             case "01":
                 mesformateado = "Enero";
                 break;
+            case "2":
             case "02":
                 mesformateado = "Febrero";
                 break;
+            case "3":
             case "03":
                 mesformateado = "Marzo";
                 break;
+            case "4":
             case "04":
                 mesformateado = "Abril";
                 break;
+            case "5":
             case "05":
                 mesformateado = "Mayo";
                 break;
+            case "6":
             case "06":
                 mesformateado = "Junio";
                 break;
+            case "7":
             case "07":
                 mesformateado = "Julio";
                 break;
+            case "8":
             case "08":
                 mesformateado = "Agosto";
                 break;
+            case "9":
             case "09":
                 mesformateado = "Septiembre";
                 break;
