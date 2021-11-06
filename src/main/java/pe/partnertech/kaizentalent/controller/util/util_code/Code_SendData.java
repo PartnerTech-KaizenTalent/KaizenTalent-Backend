@@ -201,11 +201,10 @@ public class Code_SendData {
                                                 referenciaslaborales.getReferenteReferenciaLaboral(),
                                                 referenciaslaborales.getEmailreferenteReferenciaLaboral(),
                                                 referenciaslaborales.getTelefonoreferenteReferenciaLaboral(),
-                                                referenciaslaborales.getMesinicioExperienciaLaboral(),
+                                                ConvierteMes(referenciaslaborales.getMesinicioExperienciaLaboral()),
                                                 referenciaslaborales.getAnioinicioExperienciaLaboral(),
                                                 new ImagenResponse(referenciaslaborales.getImagenExperienciaLaboral().getNombreImagen(),
-                                                        referenciaslaborales.getImagenExperienciaLaboral().getUrlImagen()),
-                                                ConvierteMes(referenciaslaborales.getMesinicioExperienciaLaboral())
+                                                        referenciaslaborales.getImagenExperienciaLaboral().getUrlImagen())
                                         ));
                             } else {
                                 list_referenciaslaborales.add(null);
@@ -220,61 +219,61 @@ public class Code_SendData {
         }
     }
 
-    private static String ConvierteMes(String mestoconvert) {
+    private static String ConvierteMes(String valor_mes) {
 
-        String mesformateado;
+        String mes_formateado;
 
-        switch (mestoconvert) {
+        switch (valor_mes) {
             case "1":
             case "01":
-                mesformateado = "Enero";
+                mes_formateado = "Enero";
                 break;
             case "2":
             case "02":
-                mesformateado = "Febrero";
+                mes_formateado = "Febrero";
                 break;
             case "3":
             case "03":
-                mesformateado = "Marzo";
+                mes_formateado = "Marzo";
                 break;
             case "4":
             case "04":
-                mesformateado = "Abril";
+                mes_formateado = "Abril";
                 break;
             case "5":
             case "05":
-                mesformateado = "Mayo";
+                mes_formateado = "Mayo";
                 break;
             case "6":
             case "06":
-                mesformateado = "Junio";
+                mes_formateado = "Junio";
                 break;
             case "7":
             case "07":
-                mesformateado = "Julio";
+                mes_formateado = "Julio";
                 break;
             case "8":
             case "08":
-                mesformateado = "Agosto";
+                mes_formateado = "Agosto";
                 break;
             case "9":
             case "09":
-                mesformateado = "Septiembre";
+                mes_formateado = "Septiembre";
                 break;
             case "10":
-                mesformateado = "Octubre";
+                mes_formateado = "Octubre";
                 break;
             case "11":
-                mesformateado = "Noviembre";
+                mes_formateado = "Noviembre";
                 break;
             case "12":
-                mesformateado = "Diciembre";
+                mes_formateado = "Diciembre";
                 break;
             default:
-                mesformateado = "";
+                mes_formateado = "";
                 break;
         }
 
-        return mesformateado;
+        return mes_formateado;
     }
 }
