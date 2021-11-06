@@ -4,6 +4,7 @@
 
 package pe.partnertech.kaizentalent.controller.profile.postulante;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -144,6 +145,20 @@ public class ExperienciaLaboralController {
                             logoempresa.setArchivoImagen(empresa.getImagenUsuario().getArchivoImagen());
 
                             imagenService.GuardarImagen(logoempresa);
+                        } else {
+                            try {
+                                InputStream fotoStream = getClass().getResourceAsStream("/static/img/DefaultLogo.png");
+                                assert fotoStream != null;
+                                byte[] file_imagen = IOUtils.toByteArray(fotoStream);
+
+                                logoempresa.setTipoarchivoImagen("image/png");
+                                logoempresa.setArchivoImagen(file_imagen);
+
+                                imagenService.GuardarImagen(logoempresa);
+                            } catch (Exception e) {
+                                return new ResponseEntity<>(new MessageResponse("Ocurrió un error al asignar el logo por defecto." + e),
+                                        HttpStatus.EXPECTATION_FAILED);
+                            }
                         }
 
                         return new ResponseEntity<>(new MessageResponse("Se ha guardado satisfactoriamente su información de " +
