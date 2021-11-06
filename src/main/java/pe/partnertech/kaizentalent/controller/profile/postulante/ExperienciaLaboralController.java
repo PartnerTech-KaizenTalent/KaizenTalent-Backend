@@ -4,6 +4,7 @@
 
 package pe.partnertech.kaizentalent.controller.profile.postulante;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -130,6 +131,8 @@ public class ExperienciaLaboralController {
                         logoempresa.setNombreImagen(nombre_logo);
                         logoempresa.setUrlImagen(url_logo);
 
+                        imagenService.GuardarImagen(logoempresa);
+
                         //Asignando Logo Empresa
                         //-----Buscando Empresa para asignar su logo
                         Optional<Usuario> empresa_data =
@@ -140,8 +143,23 @@ public class ExperienciaLaboralController {
 
                             logoempresa.setTipoarchivoImagen(empresa.getImagenUsuario().getTipoarchivoImagen());
                             logoempresa.setArchivoImagen(empresa.getImagenUsuario().getArchivoImagen());
+
+                            imagenService.GuardarImagen(logoempresa);
+                        } else {
+                            try {
+                                InputStream fotoStream = getClass().getResourceAsStream("/static/img/DefaultLogo.png");
+                                assert fotoStream != null;
+                                byte[] file_imagen = IOUtils.toByteArray(fotoStream);
+
+                                logoempresa.setTipoarchivoImagen("image/png");
+                                logoempresa.setArchivoImagen(file_imagen);
+
+                                imagenService.GuardarImagen(logoempresa);
+                            } catch (Exception e) {
+                                return new ResponseEntity<>(new MessageResponse("Ocurrió un error al asignar el logo por defecto." + e),
+                                        HttpStatus.EXPECTATION_FAILED);
+                            }
                         }
-                        imagenService.GuardarImagen(logoempresa);
 
                         return new ResponseEntity<>(new MessageResponse("Se ha guardado satisfactoriamente su información de " +
                                 "Experiencia Laboral."),
@@ -206,6 +224,7 @@ public class ExperienciaLaboralController {
                 experienciaLaboralService.BuscarExperienciaLaboral_By_IDExperienciaLaboral(id_experiencialaboral);
 
         if (experiencialaboral_data.isPresent()) {
+
             experienciaLaboralService.EliminarExperienciaLaboral(id_experiencialaboral);
 
             return new ResponseEntity<>(new MessageResponse("Se ha eliminado la Experiencia Laboral satisfactoriamente."),

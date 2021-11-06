@@ -46,18 +46,18 @@ public class ConocimientoController {
         if (postulante_data.isPresent()) {
             Usuario postulante = postulante_data.get();
 
-            Set<SkillValidation> list_skills = new HashSet<>();
+            Set<SkillValidation> list_conocimientos = new HashSet<>();
 
             conocimientoService.ValidarConocimientos(id_postulante, conocimiento.getNombreConocimiento(),
                     conocimiento.getNivelConocimiento()).forEach(
-                    conocimientos -> list_skills.add(
+                    conocimientos -> list_conocimientos.add(
                             new SkillValidation(
                                     id_postulante,
                                     conocimiento.getNombreConocimiento(),
                                     conocimiento.getNivelConocimiento()
                             )));
 
-            if (list_skills.size() < 1) {
+            if (list_conocimientos.size() < 1) {
                 //Asignando Postulante
                 conocimiento.setUsuarioConocimiento(postulante);
 
@@ -85,18 +85,18 @@ public class ConocimientoController {
         Optional<Usuario> postulante_data = usuarioService.BuscarUsuario_By_IDUsuario(id_postulante);
 
         if (postulante_data.isPresent()) {
-            Set<SkillValidation> list_skills = new HashSet<>();
+            Set<SkillValidation> list_conocimientos = new HashSet<>();
 
             conocimientoService.ValidarConocimientos(id_postulante, conocimiento.getNombreConocimiento(),
                     conocimiento.getNivelConocimiento()).forEach(
-                    conocimientos -> list_skills.add(
+                    conocimientos -> list_conocimientos.add(
                             new SkillValidation(
                                     id_postulante,
                                     conocimiento.getNombreConocimiento(),
                                     conocimiento.getNivelConocimiento()
                             )));
 
-            if (list_skills.size() < 1) {
+            if (list_conocimientos.size() < 1) {
                 Optional<Conocimiento> conocimiento_data =
                         conocimientoService.BuscarConocimiento_By_IDConocimiento(id_conocimiento);
 

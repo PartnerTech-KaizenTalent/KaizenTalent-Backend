@@ -17,7 +17,9 @@ public class ReferenciaLaboralPostulanteResponse {
 
     private String telefonoReferente;
 
-    private String periodoInicio;
+    private String mesinicioExperienciaLaboral;
+
+    private String anioinicioExperienciaLaboral;
 
     private ImagenResponse logoEmpresa;
 
@@ -26,12 +28,14 @@ public class ReferenciaLaboralPostulanteResponse {
     }
 
     public ReferenciaLaboralPostulanteResponse(String empresaReferente, String nombreReferente, String emailReferente,
-                                               String telefonoReferente, String periodoInicio, ImagenResponse logoEmpresa) {
+                                               String telefonoReferente, String mesinicioExperienciaLaboral,
+                                               String anioinicioExperienciaLaboral, ImagenResponse logoEmpresa) {
         this.empresaReferente = empresaReferente;
         this.nombreReferente = nombreReferente;
         this.emailReferente = emailReferente;
         this.telefonoReferente = telefonoReferente;
-        this.periodoInicio = periodoInicio;
+        this.mesinicioExperienciaLaboral = mesinicioExperienciaLaboral;
+        this.anioinicioExperienciaLaboral = anioinicioExperienciaLaboral;
         this.logoEmpresa = logoEmpresa;
     }
 
@@ -68,12 +72,20 @@ public class ReferenciaLaboralPostulanteResponse {
         this.telefonoReferente = telefonoReferente;
     }
 
-    public String getPeriodoInicio() {
-        return periodoInicio;
+    public String getMesinicioExperienciaLaboral() {
+        return mesinicioExperienciaLaboral;
     }
 
-    public void setPeriodoInicio(String periodoInicio) {
-        this.periodoInicio = periodoInicio;
+    public void setMesinicioExperienciaLaboral(String mesinicioExperienciaLaboral) {
+        this.mesinicioExperienciaLaboral = mesinicioExperienciaLaboral;
+    }
+
+    public String getAnioinicioExperienciaLaboral() {
+        return anioinicioExperienciaLaboral;
+    }
+
+    public void setAnioinicioExperienciaLaboral(String anioinicioExperienciaLaboral) {
+        this.anioinicioExperienciaLaboral = anioinicioExperienciaLaboral;
     }
 
     public ImagenResponse getLogoEmpresa() {

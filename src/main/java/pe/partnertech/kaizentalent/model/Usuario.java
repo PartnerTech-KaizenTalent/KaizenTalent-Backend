@@ -100,8 +100,11 @@ public class Usuario implements Serializable {
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "usuarioExperienciaLaboral")
     private Set<ExperienciaLaboral> experienciaslaboralesUsuario;
 
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "usuarioHabilidades")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "usuarioHabilidad")
     private Set<Habilidad> habilidadesUsuario;
+
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "usuarioIdioma")
+    private Set<Idioma> idiomasUsuario;
 
     @OneToMany(mappedBy = "usuario")
     private Set<UsuariosPuestosTrabajo> puestostrabajoUsuario;
@@ -353,6 +356,14 @@ public class Usuario implements Serializable {
 
     public void setHabilidadesUsuario(Set<Habilidad> habilidadesUsuario) {
         this.habilidadesUsuario = habilidadesUsuario;
+    }
+
+    public Set<Idioma> getIdiomasUsuario() {
+        return idiomasUsuario;
+    }
+
+    public void setIdiomasUsuario(Set<Idioma> idiomasUsuario) {
+        this.idiomasUsuario = idiomasUsuario;
     }
 
     public Set<UsuariosPuestosTrabajo> getPuestostrabajoUsuario() {

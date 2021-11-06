@@ -45,7 +45,7 @@ public class Code_UploadFoto {
                                                         InputStream fotoStream, IImagenService imagenService, String path)
             throws IOException {
 
-        String nombre_imagen = UUID.randomUUID() + " " + UUID.randomUUID() + ".png";
+        String nombre_imagen = UUID.randomUUID() + "" + UUID.randomUUID() + ".png";
         String url_imagen = SendImageUrl(path, nombre_imagen);
 
         //Buscando Empresa para asignar su logo

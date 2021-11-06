@@ -5,10 +5,13 @@
 package pe.partnertech.kaizentalent.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "habilidad")
-public class Habilidad {
+public class Habilidad implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     //Atributos
     @Id
@@ -26,16 +29,16 @@ public class Habilidad {
     @JoinTable(name = "usuario_habilidades",
             joinColumns = @JoinColumn(name = "id_habilidad", referencedColumnName = "id_habilidad"),
             inverseJoinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario"))
-    private Usuario usuarioHabilidades;
+    private Usuario usuarioHabilidad;
 
     //Constructores
     public Habilidad() {
     }
 
-    public Habilidad(String nombreHabilidad, String nivelHabilidad, Usuario usuarioHabilidades) {
+    public Habilidad(String nombreHabilidad, String nivelHabilidad, Usuario usuarioHabilidad) {
         this.nombreHabilidad = nombreHabilidad;
         this.nivelHabilidad = nivelHabilidad;
-        this.usuarioHabilidades = usuarioHabilidades;
+        this.usuarioHabilidad = usuarioHabilidad;
     }
 
     //Getters y Setters
@@ -63,11 +66,11 @@ public class Habilidad {
         this.nivelHabilidad = nivelHabilidad;
     }
 
-    public Usuario getUsuarioHabilidades() {
-        return usuarioHabilidades;
+    public Usuario getUsuarioHabilidad() {
+        return usuarioHabilidad;
     }
 
-    public void setUsuarioHabilidades(Usuario usuarioHabilidades) {
-        this.usuarioHabilidades = usuarioHabilidades;
+    public void setUsuarioHabilidad(Usuario usuarioHabilidad) {
+        this.usuarioHabilidad = usuarioHabilidad;
     }
 }
