@@ -11,10 +11,7 @@ import pe.partnertech.kaizentalent.dto.response.profile.postulante.ExperienciaLa
 import pe.partnertech.kaizentalent.dto.response.profile.postulante.ReferenciaLaboralPostulanteResponse;
 import pe.partnertech.kaizentalent.dto.response.profile.postulante.SkillPostulanteResponse;
 import pe.partnertech.kaizentalent.model.Usuario;
-import pe.partnertech.kaizentalent.service.IConocimientoService;
-import pe.partnertech.kaizentalent.service.IEducacionService;
-import pe.partnertech.kaizentalent.service.IExperienciaLaboralService;
-import pe.partnertech.kaizentalent.service.IUsuarioService;
+import pe.partnertech.kaizentalent.service.*;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -69,6 +66,34 @@ public class Code_SendData {
             }
 
             return list_conocimientos;
+        } else {
+            return null;
+        }
+    }
+
+    public static Set<SkillPostulanteResponse> SendHabilidades(Long id_postulante, IUsuarioService usuarioService,
+                                                               IHabilidadService habilidadService) {
+
+        Optional<Usuario> postulante_data = usuarioService.BuscarUsuario_By_IDUsuario(id_postulante);
+
+        if (postulante_data.isPresent()) {
+            Usuario postulante = postulante_data.get();
+
+            Set<SkillPostulanteResponse> list_habilidades = new HashSet<>();
+
+            if (postulante.getHabilidadesUsuario() == null) {
+                list_habilidades.add(null);
+            } else {
+                habilidadService.BuscarHabilidades_By_IDPostulante(id_postulante).forEach(
+                        habilidades -> list_habilidades.add(
+                                new SkillPostulanteResponse(
+                                        habilidades.getIdHabilidad(),
+                                        habilidades.getNombreHabilidad(),
+                                        habilidades.getNivelHabilidad()
+                                )));
+            }
+
+            return list_habilidades;
         } else {
             return null;
         }
