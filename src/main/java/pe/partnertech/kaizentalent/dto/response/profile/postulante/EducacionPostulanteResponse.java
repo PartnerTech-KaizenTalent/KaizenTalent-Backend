@@ -11,9 +11,13 @@ public class EducacionPostulanteResponse {
 
     private String institucionEducacion;
 
-    private String periodoinicioEducacion;
+    private String mesinicioEducacion;
 
-    private String periodofinEducacion;
+    private String anioinicioEducacion;
+
+    private String mesfinEducacion;
+
+    private String aniofinEducacion;
 
     private String nombreEducacion;
 
@@ -25,13 +29,15 @@ public class EducacionPostulanteResponse {
     public EducacionPostulanteResponse() {
     }
 
-    public EducacionPostulanteResponse(Long idEducacion, String institucionEducacion, String periodoinicioEducacion,
-                                       String periodofinEducacion, String nombreEducacion, String nivelEducacion,
-                                       String estadoEducacion) {
+    public EducacionPostulanteResponse(Long idEducacion, String institucionEducacion, String mesinicioEducacion,
+                                       String anioinicioEducacion, String mesfinEducacion, String aniofinEducacion,
+                                       String nombreEducacion, String nivelEducacion, String estadoEducacion) {
         this.idEducacion = idEducacion;
         this.institucionEducacion = institucionEducacion;
-        this.periodoinicioEducacion = periodoinicioEducacion;
-        this.periodofinEducacion = periodofinEducacion;
+        this.mesinicioEducacion = mesinicioEducacion;
+        this.anioinicioEducacion = anioinicioEducacion;
+        this.mesfinEducacion = mesfinEducacion;
+        this.aniofinEducacion = aniofinEducacion;
         this.nombreEducacion = nombreEducacion;
         this.nivelEducacion = nivelEducacion;
         this.estadoEducacion = estadoEducacion;
@@ -54,20 +60,36 @@ public class EducacionPostulanteResponse {
         this.institucionEducacion = institucionEducacion;
     }
 
-    public String getPeriodoinicioEducacion() {
-        return periodoinicioEducacion;
+    public String getMesinicioEducacion() {
+        return mesinicioEducacion;
     }
 
-    public void setPeriodoinicioEducacion(String periodoinicioEducacion) {
-        this.periodoinicioEducacion = periodoinicioEducacion;
+    public void setMesinicioEducacion(String mesinicioEducacion) {
+        this.mesinicioEducacion = mesinicioEducacion;
     }
 
-    public String getPeriodofinEducacion() {
-        return periodofinEducacion;
+    public String getAnioinicioEducacion() {
+        return anioinicioEducacion;
     }
 
-    public void setPeriodofinEducacion(String periodofinEducacion) {
-        this.periodofinEducacion = periodofinEducacion;
+    public void setAnioinicioEducacion(String anioinicioEducacion) {
+        this.anioinicioEducacion = anioinicioEducacion;
+    }
+
+    public String getMesfinEducacion() {
+        return mesfinEducacion;
+    }
+
+    public void setMesfinEducacion(String mesfinEducacion) {
+        this.mesfinEducacion = mesfinEducacion;
+    }
+
+    public String getAniofinEducacion() {
+        return aniofinEducacion;
+    }
+
+    public void setAniofinEducacion(String aniofinEducacion) {
+        this.aniofinEducacion = aniofinEducacion;
     }
 
     public String getNombreEducacion() {
