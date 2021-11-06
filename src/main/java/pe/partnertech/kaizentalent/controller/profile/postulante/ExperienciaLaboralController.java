@@ -130,6 +130,8 @@ public class ExperienciaLaboralController {
                         logoempresa.setNombreImagen(nombre_logo);
                         logoempresa.setUrlImagen(url_logo);
 
+                        imagenService.GuardarImagen(logoempresa);
+
                         //Asignando Logo Empresa
                         //-----Buscando Empresa para asignar su logo
                         Optional<Usuario> empresa_data =
@@ -140,8 +142,9 @@ public class ExperienciaLaboralController {
 
                             logoempresa.setTipoarchivoImagen(empresa.getImagenUsuario().getTipoarchivoImagen());
                             logoempresa.setArchivoImagen(empresa.getImagenUsuario().getArchivoImagen());
+
+                            imagenService.GuardarImagen(logoempresa);
                         }
-                        imagenService.GuardarImagen(logoempresa);
 
                         return new ResponseEntity<>(new MessageResponse("Se ha guardado satisfactoriamente su información de " +
                                 "Experiencia Laboral."),
