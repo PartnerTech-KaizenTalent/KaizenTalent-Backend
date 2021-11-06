@@ -13,9 +13,13 @@ public class ExperienciaLaboralPostulanteResponse {
 
     private String empresaExperienciaLaboral;
 
-    private String periodoinicioExperienciaLaboral;
+    private String mesinicioExperienciaLaboral;
 
-    private String periodofinExperienciaLaboral;
+    private String anioinicioExperienciaLaboral;
+
+    private String mesfinExperienciaLaboral;
+
+    private String aniofinExperienciaLaboral;
 
     private String nombreExperienciaLaboral;
 
@@ -34,14 +38,17 @@ public class ExperienciaLaboralPostulanteResponse {
     }
 
     public ExperienciaLaboralPostulanteResponse(Long idExperienciaLaboral, String empresaExperienciaLaboral,
-                                                String periodoinicioExperienciaLaboral, String periodofinExperienciaLaboral,
+                                                String mesinicioExperienciaLaboral, String anioinicioExperienciaLaboral,
+                                                String mesfinExperienciaLaboral, String aniofinExperienciaLaboral,
                                                 String nombreExperienciaLaboral, ImagenResponse logoEmpresa,
                                                 String descripcionExperienciaLaboral, String nombreReferente,
                                                 String emailReferente, String telefonoReferente) {
         this.idExperienciaLaboral = idExperienciaLaboral;
         this.empresaExperienciaLaboral = empresaExperienciaLaboral;
-        this.periodoinicioExperienciaLaboral = periodoinicioExperienciaLaboral;
-        this.periodofinExperienciaLaboral = periodofinExperienciaLaboral;
+        this.mesinicioExperienciaLaboral = mesinicioExperienciaLaboral;
+        this.anioinicioExperienciaLaboral = anioinicioExperienciaLaboral;
+        this.mesfinExperienciaLaboral = mesfinExperienciaLaboral;
+        this.aniofinExperienciaLaboral = aniofinExperienciaLaboral;
         this.nombreExperienciaLaboral = nombreExperienciaLaboral;
         this.logoEmpresa = logoEmpresa;
         this.descripcionExperienciaLaboral = descripcionExperienciaLaboral;
@@ -67,20 +74,36 @@ public class ExperienciaLaboralPostulanteResponse {
         this.empresaExperienciaLaboral = empresaExperienciaLaboral;
     }
 
-    public String getPeriodoinicioExperienciaLaboral() {
-        return periodoinicioExperienciaLaboral;
+    public String getMesinicioExperienciaLaboral() {
+        return mesinicioExperienciaLaboral;
     }
 
-    public void setPeriodoinicioExperienciaLaboral(String periodoinicioExperienciaLaboral) {
-        this.periodoinicioExperienciaLaboral = periodoinicioExperienciaLaboral;
+    public void setMesinicioExperienciaLaboral(String mesinicioExperienciaLaboral) {
+        this.mesinicioExperienciaLaboral = mesinicioExperienciaLaboral;
     }
 
-    public String getPeriodofinExperienciaLaboral() {
-        return periodofinExperienciaLaboral;
+    public String getAnioinicioExperienciaLaboral() {
+        return anioinicioExperienciaLaboral;
     }
 
-    public void setPeriodofinExperienciaLaboral(String periodofinExperienciaLaboral) {
-        this.periodofinExperienciaLaboral = periodofinExperienciaLaboral;
+    public void setAnioinicioExperienciaLaboral(String anioinicioExperienciaLaboral) {
+        this.anioinicioExperienciaLaboral = anioinicioExperienciaLaboral;
+    }
+
+    public String getMesfinExperienciaLaboral() {
+        return mesfinExperienciaLaboral;
+    }
+
+    public void setMesfinExperienciaLaboral(String mesfinExperienciaLaboral) {
+        this.mesfinExperienciaLaboral = mesfinExperienciaLaboral;
+    }
+
+    public String getAniofinExperienciaLaboral() {
+        return aniofinExperienciaLaboral;
+    }
+
+    public void setAniofinExperienciaLaboral(String aniofinExperienciaLaboral) {
+        this.aniofinExperienciaLaboral = aniofinExperienciaLaboral;
     }
 
     public String getNombreExperienciaLaboral() {
