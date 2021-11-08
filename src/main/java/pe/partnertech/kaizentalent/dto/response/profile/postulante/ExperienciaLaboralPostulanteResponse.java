@@ -13,13 +13,9 @@ public class ExperienciaLaboralPostulanteResponse {
 
     private String empresaExperienciaLaboral;
 
-    private String mesinicioExperienciaLaboral;
+    private String periodoinicioExperienciaLaboral;
 
-    private String anioinicioExperienciaLaboral;
-
-    private String mesfinExperienciaLaboral;
-
-    private String aniofinExperienciaLaboral;
+    private String periodofinExperienciaLaboral;
 
     private String nombreExperienciaLaboral;
 
@@ -38,17 +34,14 @@ public class ExperienciaLaboralPostulanteResponse {
     }
 
     public ExperienciaLaboralPostulanteResponse(Long idExperienciaLaboral, String empresaExperienciaLaboral,
-                                                String mesinicioExperienciaLaboral, String anioinicioExperienciaLaboral,
-                                                String mesfinExperienciaLaboral, String aniofinExperienciaLaboral,
+                                                String periodoinicioExperienciaLaboral, String periodofinExperienciaLaboral,
                                                 String nombreExperienciaLaboral, ImagenResponse logoEmpresa,
                                                 String descripcionExperienciaLaboral, String nombreReferente,
                                                 String emailReferente, String telefonoReferente) {
         this.idExperienciaLaboral = idExperienciaLaboral;
         this.empresaExperienciaLaboral = empresaExperienciaLaboral;
-        this.mesinicioExperienciaLaboral = mesinicioExperienciaLaboral;
-        this.anioinicioExperienciaLaboral = anioinicioExperienciaLaboral;
-        this.mesfinExperienciaLaboral = mesfinExperienciaLaboral;
-        this.aniofinExperienciaLaboral = aniofinExperienciaLaboral;
+        this.periodoinicioExperienciaLaboral = periodoinicioExperienciaLaboral;
+        this.periodofinExperienciaLaboral = periodofinExperienciaLaboral;
         this.nombreExperienciaLaboral = nombreExperienciaLaboral;
         this.logoEmpresa = logoEmpresa;
         this.descripcionExperienciaLaboral = descripcionExperienciaLaboral;
@@ -58,6 +51,7 @@ public class ExperienciaLaboralPostulanteResponse {
     }
 
     //Getters y Setters
+
     public Long getIdExperienciaLaboral() {
         return idExperienciaLaboral;
     }
@@ -74,36 +68,20 @@ public class ExperienciaLaboralPostulanteResponse {
         this.empresaExperienciaLaboral = empresaExperienciaLaboral;
     }
 
-    public String getMesinicioExperienciaLaboral() {
-        return mesinicioExperienciaLaboral;
+    public String getPeriodoinicioExperienciaLaboral() {
+        return periodoinicioExperienciaLaboral;
     }
 
-    public void setMesinicioExperienciaLaboral(String mesinicioExperienciaLaboral) {
-        this.mesinicioExperienciaLaboral = mesinicioExperienciaLaboral;
+    public void setPeriodoinicioExperienciaLaboral(String periodoinicioExperienciaLaboral) {
+        this.periodoinicioExperienciaLaboral = periodoinicioExperienciaLaboral;
     }
 
-    public String getAnioinicioExperienciaLaboral() {
-        return anioinicioExperienciaLaboral;
+    public String getPeriodofinExperienciaLaboral() {
+        return periodofinExperienciaLaboral;
     }
 
-    public void setAnioinicioExperienciaLaboral(String anioinicioExperienciaLaboral) {
-        this.anioinicioExperienciaLaboral = anioinicioExperienciaLaboral;
-    }
-
-    public String getMesfinExperienciaLaboral() {
-        return mesfinExperienciaLaboral;
-    }
-
-    public void setMesfinExperienciaLaboral(String mesfinExperienciaLaboral) {
-        this.mesfinExperienciaLaboral = mesfinExperienciaLaboral;
-    }
-
-    public String getAniofinExperienciaLaboral() {
-        return aniofinExperienciaLaboral;
-    }
-
-    public void setAniofinExperienciaLaboral(String aniofinExperienciaLaboral) {
-        this.aniofinExperienciaLaboral = aniofinExperienciaLaboral;
+    public void setPeriodofinExperienciaLaboral(String periodofinExperienciaLaboral) {
+        this.periodofinExperienciaLaboral = periodofinExperienciaLaboral;
     }
 
     public String getNombreExperienciaLaboral() {

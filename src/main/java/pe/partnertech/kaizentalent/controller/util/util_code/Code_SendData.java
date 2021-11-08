@@ -149,25 +149,47 @@ public class Code_SendData {
                 return null;
             } else {
                 experienciaLaboralService.BuscarExperienciasLaborales_By_IDPostulante(id_postulante).forEach(
-                        experienciaslaborales -> list_experienciaslaborales.add(
-                                new ExperienciaLaboralPostulanteResponse(
-                                        experienciaslaborales.getIdExperienciaLaboral(),
-                                        experienciaslaborales.getEmpresaExperienciaLaboral(),
-                                        experienciaslaborales.getMesinicioExperienciaLaboral(),
-                                        experienciaslaborales.getAnioinicioExperienciaLaboral(),
-                                        experienciaslaborales.getMesfinExperienciaLaboral(),
-                                        experienciaslaborales.getAniofinExperienciaLaboral(),
-                                        experienciaslaborales.getNombreExperienciaLaboral(),
-                                        new ImagenResponse(
-                                                experienciaslaborales.getImagenExperienciaLaboral().getNombreImagen(),
-                                                experienciaslaborales.getImagenExperienciaLaboral().getUrlImagen()
-                                        ),
-                                        experienciaslaborales.getDescripcionExperienciaLaboral(),
-                                        experienciaslaborales.getReferenteReferenciaLaboral(),
-                                        experienciaslaborales.getEmailreferenteReferenciaLaboral(),
-                                        experienciaslaborales.getTelefonoreferenteReferenciaLaboral()
-                                ))
-                );
+                        experienciaslaborales -> {
+                            if(experienciaslaborales.getMesfinExperienciaLaboral().equals("") &&
+                            experienciaslaborales.getAniofinExperienciaLaboral().equals("")) {
+                                list_experienciaslaborales.add(
+                                        new ExperienciaLaboralPostulanteResponse(
+                                                experienciaslaborales.getIdExperienciaLaboral(),
+                                                experienciaslaborales.getEmpresaExperienciaLaboral(),
+                                                ConvierteMes(experienciaslaborales.getMesinicioExperienciaLaboral()) + " " +
+                                                        experienciaslaborales.getAnioinicioExperienciaLaboral(),
+                                                "En Curso",
+                                                experienciaslaborales.getNombreExperienciaLaboral(),
+                                                new ImagenResponse(
+                                                        experienciaslaborales.getImagenExperienciaLaboral().getNombreImagen(),
+                                                        experienciaslaborales.getImagenExperienciaLaboral().getUrlImagen()
+                                                ),
+                                                experienciaslaborales.getDescripcionExperienciaLaboral(),
+                                                experienciaslaborales.getReferenteReferenciaLaboral(),
+                                                experienciaslaborales.getEmailreferenteReferenciaLaboral(),
+                                                experienciaslaborales.getTelefonoreferenteReferenciaLaboral()
+                                        ));
+                            } else {
+                                list_experienciaslaborales.add(
+                                        new ExperienciaLaboralPostulanteResponse(
+                                                experienciaslaborales.getIdExperienciaLaboral(),
+                                                experienciaslaborales.getEmpresaExperienciaLaboral(),
+                                                ConvierteMes(experienciaslaborales.getMesinicioExperienciaLaboral()) + " " +
+                                                        experienciaslaborales.getAnioinicioExperienciaLaboral(),
+                                                ConvierteMes(experienciaslaborales.getMesfinExperienciaLaboral()) + " " +
+                                                        experienciaslaborales.getAniofinExperienciaLaboral(),
+                                                experienciaslaborales.getNombreExperienciaLaboral(),
+                                                new ImagenResponse(
+                                                        experienciaslaborales.getImagenExperienciaLaboral().getNombreImagen(),
+                                                        experienciaslaborales.getImagenExperienciaLaboral().getUrlImagen()
+                                                ),
+                                                experienciaslaborales.getDescripcionExperienciaLaboral(),
+                                                experienciaslaborales.getReferenteReferenciaLaboral(),
+                                                experienciaslaborales.getEmailreferenteReferenciaLaboral(),
+                                                experienciaslaborales.getTelefonoreferenteReferenciaLaboral()
+                                        ));
+                            }}
+                        );
             }
 
             return list_experienciaslaborales;
