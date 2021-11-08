@@ -143,7 +143,7 @@ public class HabilidadController {
     }
 
     @GetMapping("/postulante/{id_postulante}/habilidad/show")
-    @PreAuthorize("hasRole('ROLE_POSTULANTE')")
+    @PreAuthorize("hasRole('ROLE_POSTULANTE') or hasRole('ROLE_RECLUTADOR')")
     public ResponseEntity<?> MostrarHabilidadesPostulante(@PathVariable("id_postulante") Long id_postulante) {
 
         Optional<Usuario> postulante_data = usuarioService.BuscarUsuario_By_IDUsuario(id_postulante);
