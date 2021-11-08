@@ -36,8 +36,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Override
     public Set<Usuario> MostrarPostulantes() {
-        //TODO: DAO DE Headhunting
-        return null;
+        return data.findPostulantes();
     }
 
     @Override
