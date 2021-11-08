@@ -252,7 +252,7 @@ public class ExperienciaLaboralController {
     }
 
     @GetMapping("/postulante/{id_postulante}/referencialaboral/show")
-    @PreAuthorize("hasRole('ROLE_POSTULANTE')")
+    @PreAuthorize("hasRole('ROLE_POSTULANTE') or hasRole('ROLE_RECLUTADOR')")
     public ResponseEntity<?> MostrarReferenciasLaboralesPostulante(@PathVariable("id_postulante") Long id_postulante) {
 
         Optional<Usuario> postulante_data = usuarioService.BuscarUsuario_By_IDUsuario(id_postulante);
