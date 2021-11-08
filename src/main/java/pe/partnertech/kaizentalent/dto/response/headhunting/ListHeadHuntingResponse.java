@@ -28,7 +28,7 @@ public class ListHeadHuntingResponse {
 
     @JsonIgnore
     private Set<Educacion> listEducaciones;
-    private String institucionesPostulante;
+    private Set<InstitucionesHeadhuntingResponse> institucionesPostulante;
 
     @JsonIgnore
     private Set<Conocimiento> listConocimientos;
@@ -53,7 +53,8 @@ public class ListHeadHuntingResponse {
 
     public ListHeadHuntingResponse(Long idPostulante, ImagenResponse fotoperfilPostulante, String sueldoPostulante,
                                    String nombrePostulante, String tituloPostulante, String telefonoPostulante,
-                                   String ciudadPostulante, Set<Educacion> listEducaciones, String institucionesPostulante,
+                                   String ciudadPostulante, Set<Educacion> listEducaciones,
+                                   Set<InstitucionesHeadhuntingResponse> institucionesPostulante,
                                    Set<Conocimiento> listConocimientos, String conocimientosPostulante,
                                    Set<Habilidad> listHabilidades, String habilidadesPostulante, Set<Idioma> listIdiomas,
                                    String idiomasPostulante, LocalDate fechanacimientoPostulante, long edadPostulante) {
@@ -142,11 +143,11 @@ public class ListHeadHuntingResponse {
         this.listEducaciones = listEducaciones;
     }
 
-    public String getInstitucionesPostulante() {
+    public Set<InstitucionesHeadhuntingResponse> getInstitucionesPostulante() {
         return institucionesPostulante;
     }
 
-    public void setInstitucionesPostulante(String institucionesPostulante) {
+    public void setInstitucionesPostulante(Set<InstitucionesHeadhuntingResponse> institucionesPostulante) {
         this.institucionesPostulante = institucionesPostulante;
     }
 

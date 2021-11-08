@@ -75,13 +75,9 @@ public class HeadhuntingController {
         return new ResponseEntity<>(list_headhunting, HttpStatus.OK);
     }
 
-    String SendInstituciones(Set<Educacion> list_educaciones) {
+    Set<InstitucionesHeadhuntingResponse> SendInstituciones(Set<Educacion> list_educaciones) {
 
-        Set<InstitucionesHeadhuntingResponse> list_instituciones = list_educaciones.stream().map(
+        return list_educaciones.stream().map(
                 educacion -> new InstitucionesHeadhuntingResponse(educacion.getInstitucionEducacion())).collect(Collectors.toSet());
-
-        String[] instituciones = list_instituciones.stream().toArray(String[]::new);
-
-        return String.join(",", instituciones);
     }
 }
