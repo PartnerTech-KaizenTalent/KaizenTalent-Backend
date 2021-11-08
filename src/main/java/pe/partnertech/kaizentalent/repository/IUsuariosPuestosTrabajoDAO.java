@@ -84,7 +84,6 @@ public interface IUsuariosPuestosTrabajoDAO extends JpaRepository<UsuariosPuesto
             "JOIN PuestoTrabajo pt ON upt.puestotrabajo.idPuestoTrabajo = pt.idPuestoTrabajo " +
             "JOIN Usuario u ON upt.usuario.idUsuario = u.idUsuario " +
             "JOIN Imagen i ON u.imagenUsuario.idImagen = i.idImagen " +
-            "JOIN DocumentoCV dcv ON u.documentoCVUsuario.idDocumentoCV = dcv.idDocumentoCV " +
             "WHERE u.tipodocumentoUsuario NOT LIKE 'RUC' AND pt.idPuestoTrabajo = ?1")
     Set<UsuariosPuestosTrabajo> findPostulantesByIdPublicacion(Long id_publicacion);
 
