@@ -30,7 +30,7 @@ public class BasicInfoPostulanteController {
     }
 
     @GetMapping("/postulante/{id_postulante}/profile/basicinfo")
-    @PreAuthorize("hasRole('ROLE_POSTULANTE')")
+    @PreAuthorize("hasRole('ROLE_POSTULANTE') or hasRole('ROLE_RECLUTADOR')")
     public ResponseEntity<?> BasicInfoPostulante(@PathVariable("id_postulante") Long id_postulante) {
 
         Optional<Usuario> postulante_data = usuarioService.BuscarUsuario_By_IDUsuario(id_postulante);

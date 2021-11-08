@@ -99,6 +99,34 @@ public class Code_SendData {
         }
     }
 
+    public static Set<SkillPostulanteResponse> SendIdiomas(Long id_postulante, IUsuarioService usuarioService,
+                                                           IIdiomaService idiomaService) {
+
+        Optional<Usuario> postulante_data = usuarioService.BuscarUsuario_By_IDUsuario(id_postulante);
+
+        if (postulante_data.isPresent()) {
+            Usuario postulante = postulante_data.get();
+
+            Set<SkillPostulanteResponse> list_idiomas = new HashSet<>();
+
+            if (postulante.getIdiomasUsuario() == null) {
+                list_idiomas.add(null);
+            } else {
+                idiomaService.BuscarIdiomas_By_IDPostulante(id_postulante).forEach(
+                        idiomas -> list_idiomas.add(
+                                new SkillPostulanteResponse(
+                                        idiomas.getIdIdioma(),
+                                        idiomas.getNombreIdioma(),
+                                        idiomas.getNivelIdioma()
+                                )));
+            }
+
+            return list_idiomas;
+        } else {
+            return null;
+        }
+    }
+
     public static Set<EducacionPostulanteResponse> SendEducaciones(Long id_postulante, IUsuarioService usuarioService,
                                                                    IEducacionService educacionService) {
 
@@ -113,18 +141,31 @@ public class Code_SendData {
                 return null;
             } else {
                 educacionService.BuscarEducaciones_By_IDPostulante(id_postulante).forEach(
-                        educaciones -> list_educaciones.add(
-                                new EducacionPostulanteResponse(
-                                        educaciones.getIdEducacion(),
-                                        educaciones.getInstitucionEducacion(),
-                                        educaciones.getMesinicioEducacion(),
-                                        educaciones.getAnioinicioEducacion(),
-                                        educaciones.getMesfinEducacion(),
-                                        educaciones.getAniofinEducacion(),
-                                        educaciones.getNombreEducacion(),
-                                        educaciones.getNivelEducacion(),
-                                        educaciones.getEstadoEducacion()
-                                ))
+                        educaciones -> {
+                            if (educaciones.getMesfinEducacion().equals("") && educaciones.getAniofinEducacion().equals("")) {
+                                list_educaciones.add(
+                                        new EducacionPostulanteResponse(
+                                                educaciones.getIdEducacion(),
+                                                educaciones.getInstitucionEducacion(),
+                                                ConvierteMes(educaciones.getMesinicioEducacion()) + " " + educaciones.getAnioinicioEducacion(),
+                                                "En Curso",
+                                                educaciones.getNombreEducacion(),
+                                                educaciones.getNivelEducacion(),
+                                                educaciones.getEstadoEducacion()
+                                        ));
+                            } else {
+                                list_educaciones.add(
+                                        new EducacionPostulanteResponse(
+                                                educaciones.getIdEducacion(),
+                                                educaciones.getInstitucionEducacion(),
+                                                ConvierteMes(educaciones.getMesinicioEducacion()) + " " + educaciones.getAnioinicioEducacion(),
+                                                ConvierteMes(educaciones.getMesfinEducacion()) + " " + educaciones.getAniofinEducacion(),
+                                                educaciones.getNombreEducacion(),
+                                                educaciones.getNivelEducacion(),
+                                                educaciones.getEstadoEducacion()
+                                        ));
+                            }
+                        }
                 );
             }
 
@@ -150,8 +191,8 @@ public class Code_SendData {
             } else {
                 experienciaLaboralService.BuscarExperienciasLaborales_By_IDPostulante(id_postulante).forEach(
                         experienciaslaborales -> {
-                            if(experienciaslaborales.getMesfinExperienciaLaboral().equals("") &&
-                            experienciaslaborales.getAniofinExperienciaLaboral().equals("")) {
+                            if (experienciaslaborales.getMesfinExperienciaLaboral().equals("") &&
+                                    experienciaslaborales.getAniofinExperienciaLaboral().equals("")) {
                                 list_experienciaslaborales.add(
                                         new ExperienciaLaboralPostulanteResponse(
                                                 experienciaslaborales.getIdExperienciaLaboral(),
@@ -188,8 +229,9 @@ public class Code_SendData {
                                                 experienciaslaborales.getEmailreferenteReferenciaLaboral(),
                                                 experienciaslaborales.getTelefonoreferenteReferenciaLaboral()
                                         ));
-                            }}
-                        );
+                            }
+                        }
+                );
             }
 
             return list_experienciaslaborales;
@@ -224,7 +266,7 @@ public class Code_SendData {
                                                 referenciaslaborales.getEmailreferenteReferenciaLaboral(),
                                                 referenciaslaborales.getTelefonoreferenteReferenciaLaboral(),
                                                 ConvierteMes(referenciaslaborales.getMesinicioExperienciaLaboral()) + " " +
-                                                referenciaslaborales.getAnioinicioExperienciaLaboral(),
+                                                        referenciaslaborales.getAnioinicioExperienciaLaboral(),
                                                 new ImagenResponse(referenciaslaborales.getImagenExperienciaLaboral().getNombreImagen(),
                                                         referenciaslaborales.getImagenExperienciaLaboral().getUrlImagen())
                                         ));
