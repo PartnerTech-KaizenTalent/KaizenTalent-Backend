@@ -31,6 +31,9 @@ public interface IUsuarioDAO extends JpaRepository<Usuario, Long> {
     @Query("SELECT u FROM Usuario u WHERE u.tipodocumentoUsuario LIKE 'RUC' ORDER BY u.nombreUsuario ASC")
     Set<Usuario> findUsuariosEmpresa();
 
+    @Query("SELECT u FROM Usuario u WHERE u.tipodocumentoUsuario <> 'RUC' ORDER BY u.nombreUsuario ASC")
+    Set<Usuario> findPostulantes();
+
     Set<Usuario> findByNombreUsuarioContainingIgnoreCaseOrderByNombreUsuarioAsc(String nombre_usuario);
 
     boolean existsByUsernameUsuario(String username_usuario);
