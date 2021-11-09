@@ -13,32 +13,49 @@ import java.util.Set;
 
 public class ListHeadHuntingResponse {
 
-    @JsonIgnore
-    LocalDate fechanacimientoPostulante;
-    int edadPostulante;
     //Atributos
     private Long idPostulante;
+
     private ImagenResponse fotoperfilPostulante;
+
     private String sueldoPostulante;
+
     private String nombrePostulante;
+
     @JsonIgnore
     private Set<ExperienciaLaboral> listExperienciasLaborales;
+
     private Set<ExperienciaLaboralHeadhuntingResponse> experiencialaboralPostulante;
+
     private String tituloPostulante;
+
     private String telefonoPostulante;
+
     private String ciudadPostulante;
+
     @JsonIgnore
     private Set<Educacion> listEducaciones;
+
     private String institucionesPostulante;
+
     @JsonIgnore
     private Set<Conocimiento> listConocimientos;
+
     private String conocimientosPostulante;
+
     @JsonIgnore
     private Set<Habilidad> listHabilidades;
+
     private String habilidadesPostulante;
+
     @JsonIgnore
     private Set<Idioma> listIdiomas;
+
     private String idiomasPostulante;
+    @JsonIgnore
+    LocalDate fechanacimientoPostulante;
+
+    int edadPostulante;
 
     //Constructores
     public ListHeadHuntingResponse() {
@@ -74,6 +91,22 @@ public class ListHeadHuntingResponse {
     }
 
     //Getters y Setters
+    public LocalDate getFechanacimientoPostulante() {
+        return fechanacimientoPostulante;
+    }
+
+    public void setFechanacimientoPostulante(LocalDate fechanacimientoPostulante) {
+        this.fechanacimientoPostulante = fechanacimientoPostulante;
+    }
+
+    public int getEdadPostulante() {
+        return edadPostulante;
+    }
+
+    public void setEdadPostulante(int edadPostulante) {
+        this.edadPostulante = edadPostulante;
+    }
+
     public Long getIdPostulante() {
         return idPostulante;
     }
@@ -208,21 +241,5 @@ public class ListHeadHuntingResponse {
 
     public void setIdiomasPostulante(String idiomasPostulante) {
         this.idiomasPostulante = idiomasPostulante;
-    }
-
-    public LocalDate getFechanacimientoPostulante() {
-        return fechanacimientoPostulante;
-    }
-
-    public void setFechanacimientoPostulante(LocalDate fechanacimientoPostulante) {
-        this.fechanacimientoPostulante = fechanacimientoPostulante;
-    }
-
-    public int getEdadPostulante() {
-        return edadPostulante;
-    }
-
-    public void setEdadPostulante(int edadPostulante) {
-        this.edadPostulante = edadPostulante;
     }
 }
