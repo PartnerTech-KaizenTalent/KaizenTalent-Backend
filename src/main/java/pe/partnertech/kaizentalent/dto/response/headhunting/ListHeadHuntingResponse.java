@@ -9,60 +9,55 @@ import pe.partnertech.kaizentalent.dto.response.general.ImagenResponse;
 import pe.partnertech.kaizentalent.model.*;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 public class ListHeadHuntingResponse {
 
+    @JsonIgnore
+    LocalDate fechanacimientoPostulante;
+    int edadPostulante;
     //Atributos
     private Long idPostulante;
     private ImagenResponse fotoperfilPostulante;
     private String sueldoPostulante;
     private String nombrePostulante;
-
-    //TODO: Experiencia Laboral Actual
-    //TODO: Educacion Actual
-
+    @JsonIgnore
+    private Set<ExperienciaLaboral> listExperienciasLaborales;
+    private Set<ExperienciaLaboralHeadhuntingResponse> experiencialaboralPostulante;
     private String tituloPostulante;
     private String telefonoPostulante;
     private String ciudadPostulante;
-
     @JsonIgnore
     private Set<Educacion> listEducaciones;
     private String institucionesPostulante;
-
     @JsonIgnore
     private Set<Conocimiento> listConocimientos;
-    private String  conocimientosPostulante;
-
+    private String conocimientosPostulante;
     @JsonIgnore
     private Set<Habilidad> listHabilidades;
     private String habilidadesPostulante;
-
     @JsonIgnore
     private Set<Idioma> listIdiomas;
     private String idiomasPostulante;
-
-    @JsonIgnore
-    LocalDate fechanacimientoPostulante;
-
-    long edadPostulante;
 
     //Constructores
     public ListHeadHuntingResponse() {
     }
 
     public ListHeadHuntingResponse(Long idPostulante, ImagenResponse fotoperfilPostulante, String sueldoPostulante,
-                                   String nombrePostulante, String tituloPostulante, String telefonoPostulante,
-                                   String ciudadPostulante, Set<Educacion> listEducaciones,
-                                   String institucionesPostulante, Set<Conocimiento> listConocimientos,
-                                   String conocimientosPostulante, Set<Habilidad> listHabilidades,
-                                   String habilidadesPostulante, Set<Idioma> listIdiomas, String idiomasPostulante,
-                                   LocalDate fechanacimientoPostulante, long edadPostulante) {
+                                   String nombrePostulante, Set<ExperienciaLaboral> listExperienciasLaborales,
+                                   Set<ExperienciaLaboralHeadhuntingResponse> experiencialaboralPostulante,
+                                   String tituloPostulante, String telefonoPostulante, String ciudadPostulante,
+                                   Set<Educacion> listEducaciones, String institucionesPostulante,
+                                   Set<Conocimiento> listConocimientos, String conocimientosPostulante,
+                                   Set<Habilidad> listHabilidades, String habilidadesPostulante, Set<Idioma> listIdiomas,
+                                   String idiomasPostulante, LocalDate fechanacimientoPostulante, int edadPostulante) {
         this.idPostulante = idPostulante;
         this.fotoperfilPostulante = fotoperfilPostulante;
         this.sueldoPostulante = sueldoPostulante;
         this.nombrePostulante = nombrePostulante;
+        this.listExperienciasLaborales = listExperienciasLaborales;
+        this.experiencialaboralPostulante = experiencialaboralPostulante;
         this.tituloPostulante = tituloPostulante;
         this.telefonoPostulante = telefonoPostulante;
         this.ciudadPostulante = ciudadPostulante;
@@ -79,7 +74,6 @@ public class ListHeadHuntingResponse {
     }
 
     //Getters y Setters
-
     public Long getIdPostulante() {
         return idPostulante;
     }
@@ -110,6 +104,22 @@ public class ListHeadHuntingResponse {
 
     public void setNombrePostulante(String nombrePostulante) {
         this.nombrePostulante = nombrePostulante;
+    }
+
+    public Set<ExperienciaLaboral> getListExperienciasLaborales() {
+        return listExperienciasLaborales;
+    }
+
+    public void setListExperienciasLaborales(Set<ExperienciaLaboral> listExperienciasLaborales) {
+        this.listExperienciasLaborales = listExperienciasLaborales;
+    }
+
+    public Set<ExperienciaLaboralHeadhuntingResponse> getExperiencialaboralPostulante() {
+        return experiencialaboralPostulante;
+    }
+
+    public void setExperiencialaboralPostulante(Set<ExperienciaLaboralHeadhuntingResponse> experiencialaboralPostulante) {
+        this.experiencialaboralPostulante = experiencialaboralPostulante;
     }
 
     public String getTituloPostulante() {
@@ -208,11 +218,11 @@ public class ListHeadHuntingResponse {
         this.fechanacimientoPostulante = fechanacimientoPostulante;
     }
 
-    public long getEdadPostulante() {
+    public int getEdadPostulante() {
         return edadPostulante;
     }
 
-    public void setEdadPostulante(long edadPostulante) {
+    public void setEdadPostulante(int edadPostulante) {
         this.edadPostulante = edadPostulante;
     }
 }

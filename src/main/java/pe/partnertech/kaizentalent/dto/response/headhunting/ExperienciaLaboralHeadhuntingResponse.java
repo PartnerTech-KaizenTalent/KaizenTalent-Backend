@@ -4,13 +4,31 @@
 
 package pe.partnertech.kaizentalent.dto.response.headhunting;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class ExperienciaLaboralHeadhuntingResponse {
 
     //Atributos
     private String puestoExperienciaLaboral;
+
     private String empresaExperienciaLaboral;
+
+    @JsonIgnore
+    private int mesinicioExperienciaLaboral;
+
+    @JsonIgnore
+    private int anioinicioExperienciaLaboral;
+
     private String periodoinicioExperienciaLaboral;
+
+    @JsonIgnore
+    private int mesfinExperienciaLaboral;
+
+    @JsonIgnore
+    private int aniofinExperienciaLaboral;
+
     private String periodofinExperienciaLaboral;
+
     private String descripcionExperienciaLaboral;
 
     //Constructores
@@ -18,11 +36,17 @@ public class ExperienciaLaboralHeadhuntingResponse {
     }
 
     public ExperienciaLaboralHeadhuntingResponse(String puestoExperienciaLaboral, String empresaExperienciaLaboral,
-                                                 String periodoinicioExperienciaLaboral,
-                                                 String periodofinExperienciaLaboral, String descripcionExperienciaLaboral) {
+                                                 int mesinicioExperienciaLaboral, int anioinicioExperienciaLaboral,
+                                                 String periodoinicioExperienciaLaboral, int mesfinExperienciaLaboral,
+                                                 int aniofinExperienciaLaboral, String periodofinExperienciaLaboral,
+                                                 String descripcionExperienciaLaboral) {
         this.puestoExperienciaLaboral = puestoExperienciaLaboral;
         this.empresaExperienciaLaboral = empresaExperienciaLaboral;
+        this.mesinicioExperienciaLaboral = mesinicioExperienciaLaboral;
+        this.anioinicioExperienciaLaboral = anioinicioExperienciaLaboral;
         this.periodoinicioExperienciaLaboral = periodoinicioExperienciaLaboral;
+        this.mesfinExperienciaLaboral = mesfinExperienciaLaboral;
+        this.aniofinExperienciaLaboral = aniofinExperienciaLaboral;
         this.periodofinExperienciaLaboral = periodofinExperienciaLaboral;
         this.descripcionExperienciaLaboral = descripcionExperienciaLaboral;
     }
@@ -44,12 +68,44 @@ public class ExperienciaLaboralHeadhuntingResponse {
         this.empresaExperienciaLaboral = empresaExperienciaLaboral;
     }
 
+    public int getMesinicioExperienciaLaboral() {
+        return mesinicioExperienciaLaboral;
+    }
+
+    public void setMesinicioExperienciaLaboral(int mesinicioExperienciaLaboral) {
+        this.mesinicioExperienciaLaboral = mesinicioExperienciaLaboral;
+    }
+
+    public int getAnioinicioExperienciaLaboral() {
+        return anioinicioExperienciaLaboral;
+    }
+
+    public void setAnioinicioExperienciaLaboral(int anioinicioExperienciaLaboral) {
+        this.anioinicioExperienciaLaboral = anioinicioExperienciaLaboral;
+    }
+
     public String getPeriodoinicioExperienciaLaboral() {
         return periodoinicioExperienciaLaboral;
     }
 
     public void setPeriodoinicioExperienciaLaboral(String periodoinicioExperienciaLaboral) {
         this.periodoinicioExperienciaLaboral = periodoinicioExperienciaLaboral;
+    }
+
+    public int getMesfinExperienciaLaboral() {
+        return mesfinExperienciaLaboral;
+    }
+
+    public void setMesfinExperienciaLaboral(int mesfinExperienciaLaboral) {
+        this.mesfinExperienciaLaboral = mesfinExperienciaLaboral;
+    }
+
+    public int getAniofinExperienciaLaboral() {
+        return aniofinExperienciaLaboral;
+    }
+
+    public void setAniofinExperienciaLaboral(int aniofinExperienciaLaboral) {
+        this.aniofinExperienciaLaboral = aniofinExperienciaLaboral;
     }
 
     public String getPeriodofinExperienciaLaboral() {
