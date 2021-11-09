@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pe.partnertech.kaizentalent.dto.response.general.ImagenResponse;
-import pe.partnertech.kaizentalent.dto.response.headhunting.InstitucionesHeadhuntingResponse;
 import pe.partnertech.kaizentalent.dto.response.headhunting.ListHeadHuntingResponse;
+import pe.partnertech.kaizentalent.model.Conocimiento;
 import pe.partnertech.kaizentalent.model.Educacion;
+import pe.partnertech.kaizentalent.model.Habilidad;
+import pe.partnertech.kaizentalent.model.Idioma;
 import pe.partnertech.kaizentalent.service.IExperienciaLaboralService;
 import pe.partnertech.kaizentalent.service.IUsuarioService;
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -63,11 +63,11 @@ public class HeadhuntingController {
                                     postulantes.getEducacionesUsuario(),
                                     SendInstituciones(postulantes.getEducacionesUsuario()),
                                     postulantes.getConocimientosUsuario(),
-                                    null,
+                                    SendConocimientos(postulantes.getConocimientosUsuario()),
                                     postulantes.getHabilidadesUsuario(),
-                                    null,
+                                    SendHabilidades(postulantes.getHabilidadesUsuario()),
                                     postulantes.getIdiomasUsuario(),
-                                    null,
+                                    SendIdiomas(postulantes.getIdiomasUsuario()),
                                     postulantes.getFechanacimientoUsuario(),
                                     0
                             ));
@@ -86,7 +86,46 @@ public class HeadhuntingController {
                     .map(Educacion::getInstitucionEducacion)
                     .collect(Collectors.toSet());
 
-            return String.join(",", instituciones);
+            return String.join(", ", instituciones);
+        }
+    }
+
+    String SendConocimientos(Set<Conocimiento> list_conocimientos) {
+
+        if (list_conocimientos.size() == 0) {
+            return null;
+        } else {
+            Set<String> conocimientos = list_conocimientos.stream()
+                    .map(Conocimiento::getNombreConocimiento)
+                    .collect(Collectors.toSet());
+
+            return String.join(", ", conocimientos);
+        }
+    }
+
+    String SendHabilidades(Set<Habilidad> list_habilidades) {
+
+        if (list_habilidades.size() == 0) {
+            return null;
+        } else {
+            Set<String> habilidades = list_habilidades.stream()
+                    .map(Habilidad::getNombreHabilidad)
+                    .collect(Collectors.toSet());
+
+            return String.join(", ", habilidades);
+        }
+    }
+
+    String SendIdiomas(Set<Idioma> list_idiomas) {
+
+        if (list_idiomas.size() == 0) {
+            return null;
+        } else {
+            Set<String> idiomas = list_idiomas.stream()
+                    .map(Idioma::getNombreIdioma)
+                    .collect(Collectors.toSet());
+
+            return String.join(", ", idiomas);
         }
     }
 }
