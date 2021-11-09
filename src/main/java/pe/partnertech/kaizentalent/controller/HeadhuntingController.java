@@ -81,7 +81,7 @@ public class HeadhuntingController {
         return new ResponseEntity<>(list_headhunting, HttpStatus.OK);
     }
 
-    Set<ExperienciaLaboralHeadhuntingResponse> SendExperienciaLaboral(Set<ExperienciaLaboral> list_experienciaslaborales) {
+    ExperienciaLaboralHeadhuntingResponse SendExperienciaLaboral(Set<ExperienciaLaboral> list_experienciaslaborales) {
 
         if (list_experienciaslaborales.size() == 0) {
             return null;
@@ -124,9 +124,15 @@ public class HeadhuntingController {
                     }
             );
 
-            return experienciaslaborales.stream()
+            Set<ExperienciaLaboralHeadhuntingResponse> list_experiencialaboral_sorted = experienciaslaborales.stream()
                     .sorted(Comparator.comparing(ExperienciaLaboralHeadhuntingResponse::getAnioinicioExperienciaLaboral)
                             .thenComparing(ExperienciaLaboralHeadhuntingResponse::getMesinicioExperienciaLaboral).reversed()).collect(Collectors.toCollection(LinkedHashSet::new));
+
+            new ExperienciaLaboralHeadhuntingResponse();
+            ExperienciaLaboralHeadhuntingResponse experiencialaboral_actual;
+            experiencialaboral_actual = list_experiencialaboral_sorted.iterator().next();
+
+            return experiencialaboral_actual;
         }
     }
 

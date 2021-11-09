@@ -25,7 +25,7 @@ public class ListHeadHuntingResponse {
     @JsonIgnore
     private Set<ExperienciaLaboral> listExperienciasLaborales;
 
-    private Set<ExperienciaLaboralHeadhuntingResponse> experiencialaboralPostulante;
+    private ExperienciaLaboralHeadhuntingResponse experiencialaboralPostulante;
 
     private String tituloPostulante;
 
@@ -63,7 +63,7 @@ public class ListHeadHuntingResponse {
 
     public ListHeadHuntingResponse(Long idPostulante, ImagenResponse fotoperfilPostulante, String sueldoPostulante,
                                    String nombrePostulante, Set<ExperienciaLaboral> listExperienciasLaborales,
-                                   Set<ExperienciaLaboralHeadhuntingResponse> experiencialaboralPostulante,
+                                   ExperienciaLaboralHeadhuntingResponse experiencialaboralPostulante,
                                    String tituloPostulante, String telefonoPostulante, String ciudadPostulante,
                                    Set<Educacion> listEducaciones, String institucionesPostulante,
                                    Set<Conocimiento> listConocimientos, String conocimientosPostulante,
@@ -147,11 +147,11 @@ public class ListHeadHuntingResponse {
         this.listExperienciasLaborales = listExperienciasLaborales;
     }
 
-    public Set<ExperienciaLaboralHeadhuntingResponse> getExperiencialaboralPostulante() {
+    public ExperienciaLaboralHeadhuntingResponse getExperiencialaboralPostulante() {
         return experiencialaboralPostulante;
     }
 
-    public void setExperiencialaboralPostulante(Set<ExperienciaLaboralHeadhuntingResponse> experiencialaboralPostulante) {
+    public void setExperiencialaboralPostulante(ExperienciaLaboralHeadhuntingResponse experiencialaboralPostulante) {
         this.experiencialaboralPostulante = experiencialaboralPostulante;
     }
 
