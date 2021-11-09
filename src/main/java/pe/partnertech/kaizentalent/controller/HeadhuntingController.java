@@ -20,7 +20,9 @@ import pe.partnertech.kaizentalent.service.IExperienciaLaboralService;
 import pe.partnertech.kaizentalent.service.IUsuarioService;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -92,6 +94,7 @@ public class HeadhuntingController {
                         if (experienciaLaboral.getMesfinExperienciaLaboral().equals("") &&
                                 experienciaLaboral.getAniofinExperienciaLaboral().equals("")) {
                             experienciaslaborales.add(new ExperienciaLaboralHeadhuntingResponse(
+                                    experienciaLaboral.getIdExperienciaLaboral(),
                                     experienciaLaboral.getNombreExperienciaLaboral(),
                                     experienciaLaboral.getEmpresaExperienciaLaboral(),
                                     Integer.parseInt(experienciaLaboral.getMesinicioExperienciaLaboral()),
@@ -105,6 +108,7 @@ public class HeadhuntingController {
                             ));
                         } else {
                             experienciaslaborales.add(new ExperienciaLaboralHeadhuntingResponse(
+                                    experienciaLaboral.getIdExperienciaLaboral(),
                                     experienciaLaboral.getNombreExperienciaLaboral(),
                                     experienciaLaboral.getEmpresaExperienciaLaboral(),
                                     Integer.parseInt(experienciaLaboral.getMesinicioExperienciaLaboral()),
@@ -120,7 +124,9 @@ public class HeadhuntingController {
                     }
             );
 
-            return experienciaslaborales;
+            return experienciaslaborales.stream()
+                    .sorted(Comparator.comparing(ExperienciaLaboralHeadhuntingResponse::getAnioinicioExperienciaLaboral)
+                            .thenComparing(ExperienciaLaboralHeadhuntingResponse::getMesinicioExperienciaLaboral)).collect(Collectors.toCollection(LinkedHashSet::new));
         }
     }
 

@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class ExperienciaLaboralHeadhuntingResponse {
 
     //Atributos
+    Long idExperienciaLaboral;
+
     private String puestoExperienciaLaboral;
 
     private String empresaExperienciaLaboral;
@@ -35,11 +37,12 @@ public class ExperienciaLaboralHeadhuntingResponse {
     public ExperienciaLaboralHeadhuntingResponse() {
     }
 
-    public ExperienciaLaboralHeadhuntingResponse(String puestoExperienciaLaboral, String empresaExperienciaLaboral,
-                                                 int mesinicioExperienciaLaboral, int anioinicioExperienciaLaboral,
-                                                 String periodoinicioExperienciaLaboral, int mesfinExperienciaLaboral,
-                                                 int aniofinExperienciaLaboral, String periodofinExperienciaLaboral,
-                                                 String descripcionExperienciaLaboral) {
+    public ExperienciaLaboralHeadhuntingResponse(Long idExperienciaLaboral, String puestoExperienciaLaboral,
+                                                 String empresaExperienciaLaboral, int mesinicioExperienciaLaboral,
+                                                 int anioinicioExperienciaLaboral, String periodoinicioExperienciaLaboral,
+                                                 int mesfinExperienciaLaboral, int aniofinExperienciaLaboral,
+                                                 String periodofinExperienciaLaboral, String descripcionExperienciaLaboral) {
+        this.idExperienciaLaboral = idExperienciaLaboral;
         this.puestoExperienciaLaboral = puestoExperienciaLaboral;
         this.empresaExperienciaLaboral = empresaExperienciaLaboral;
         this.mesinicioExperienciaLaboral = mesinicioExperienciaLaboral;
@@ -52,6 +55,14 @@ public class ExperienciaLaboralHeadhuntingResponse {
     }
 
     //Getters y Setters
+    public Long getIdExperienciaLaboral() {
+        return idExperienciaLaboral;
+    }
+
+    public void setIdExperienciaLaboral(Long idExperienciaLaboral) {
+        this.idExperienciaLaboral = idExperienciaLaboral;
+    }
+
     public String getPuestoExperienciaLaboral() {
         return puestoExperienciaLaboral;
     }
