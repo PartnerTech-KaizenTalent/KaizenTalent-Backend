@@ -160,7 +160,11 @@ public class HeadhuntingController {
                     .map(Conocimiento::getNombreConocimiento)
                     .collect(Collectors.toSet());
 
-            return String.join(", ", conocimientos);
+            Set<String> nivel_conocimientos = list_conocimientos.stream()
+                    .map(Conocimiento::getNivelConocimiento)
+                    .collect(Collectors.toSet());
+
+            return String.join((CharSequence) nivel_conocimientos, ", ", (CharSequence) conocimientos);
         }
     }
 
