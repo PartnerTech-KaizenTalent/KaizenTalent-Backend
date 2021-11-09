@@ -9,6 +9,7 @@ import pe.partnertech.kaizentalent.dto.response.general.ImagenResponse;
 import pe.partnertech.kaizentalent.model.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 public class ListHeadHuntingResponse {
@@ -28,7 +29,7 @@ public class ListHeadHuntingResponse {
 
     @JsonIgnore
     private Set<Educacion> listEducaciones;
-    private Set<String> institucionesPostulante;
+    private List<String> institucionesPostulante;
 
     @JsonIgnore
     private Set<Conocimiento> listConocimientos;
@@ -54,7 +55,7 @@ public class ListHeadHuntingResponse {
     public ListHeadHuntingResponse(Long idPostulante, ImagenResponse fotoperfilPostulante, String sueldoPostulante,
                                    String nombrePostulante, String tituloPostulante, String telefonoPostulante,
                                    String ciudadPostulante, Set<Educacion> listEducaciones,
-                                   Set<String> institucionesPostulante, Set<Conocimiento> listConocimientos,
+                                   List<String> institucionesPostulante, Set<Conocimiento> listConocimientos,
                                    String conocimientosPostulante, Set<Habilidad> listHabilidades,
                                    String habilidadesPostulante, Set<Idioma> listIdiomas, String idiomasPostulante,
                                    LocalDate fechanacimientoPostulante, long edadPostulante) {
@@ -143,11 +144,11 @@ public class ListHeadHuntingResponse {
         this.listEducaciones = listEducaciones;
     }
 
-    public Set<String> getInstitucionesPostulante() {
+    public List<String> getInstitucionesPostulante() {
         return institucionesPostulante;
     }
 
-    public void setInstitucionesPostulante(Set<String> institucionesPostulante) {
+    public void setInstitucionesPostulante(List<String> institucionesPostulante) {
         this.institucionesPostulante = institucionesPostulante;
     }
 
