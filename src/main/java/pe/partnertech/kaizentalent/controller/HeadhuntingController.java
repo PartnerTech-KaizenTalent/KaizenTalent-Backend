@@ -20,11 +20,9 @@ import pe.partnertech.kaizentalent.service.IExperienciaLaboralService;
 import pe.partnertech.kaizentalent.service.IUsuarioService;
 
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.time.temporal.ChronoUnit.YEARS;
 
@@ -156,7 +154,7 @@ public class HeadhuntingController {
         if (list_conocimientos.size() == 0) {
             return null;
         } else {
-            Set<String> conocimientos = list_conocimientos.stream()
+            Set<String> nombre_conocimientos = list_conocimientos.stream()
                     .map(Conocimiento::getNombreConocimiento)
                     .collect(Collectors.toSet());
 
@@ -164,7 +162,10 @@ public class HeadhuntingController {
                     .map(Conocimiento::getNivelConocimiento)
                     .collect(Collectors.toSet());
 
-            return String.join((CharSequence) nivel_conocimientos, ", ", (CharSequence) conocimientos);
+            Set<String> conocimientos = Stream.concat(nombre_conocimientos.stream(), nivel_conocimientos.stream())
+                    .collect(Collectors.toSet());
+
+            return String.join(", ", conocimientos);
         }
     }
 
