@@ -77,10 +77,14 @@ public class HeadhuntingController {
         return new ResponseEntity<>(list_headhunting, HttpStatus.OK);
     }
 
-    List<String> SendInstituciones(Set<Educacion> list_educaciones) {
+    Set<String> SendInstituciones(Set<Educacion> list_educaciones) {
 
-        return list_educaciones.stream()
-                .map(Educacion::getInstitucionEducacion)
-                .collect(Collectors.toList());
+        if (list_educaciones == null) {
+            return null;
+        } else {
+            return list_educaciones.stream()
+                    .map(Educacion::getInstitucionEducacion)
+                    .collect(Collectors.toSet());
+        }
     }
 }
