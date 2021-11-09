@@ -101,8 +101,8 @@ public class HeadhuntingController {
                                     Integer.parseInt(experienciaLaboral.getAnioinicioExperienciaLaboral()),
                                     Code_Format.ConvierteMes(experienciaLaboral.getMesinicioExperienciaLaboral()) + " " +
                                             experienciaLaboral.getAnioinicioExperienciaLaboral(),
-                                    0,
-                                    0,
+                                    null,
+                                    null,
                                     "En Curso",
                                     experienciaLaboral.getDescripcionExperienciaLaboral())
                             );
@@ -115,8 +115,8 @@ public class HeadhuntingController {
                                     Integer.parseInt(experienciaLaboral.getAnioinicioExperienciaLaboral()),
                                     Code_Format.ConvierteMes(experienciaLaboral.getMesinicioExperienciaLaboral()) + " " +
                                             experienciaLaboral.getAnioinicioExperienciaLaboral(),
-                                    Integer.parseInt(experienciaLaboral.getMesfinExperienciaLaboral()),
-                                    Integer.parseInt(experienciaLaboral.getAniofinExperienciaLaboral()),
+                                    experienciaLaboral.getMesfinExperienciaLaboral(),
+                                    experienciaLaboral.getAniofinExperienciaLaboral(),
                                     Code_Format.ConvierteMes(experienciaLaboral.getMesfinExperienciaLaboral()) + " " +
                                             experienciaLaboral.getAniofinExperienciaLaboral(),
                                     experienciaLaboral.getDescripcionExperienciaLaboral())

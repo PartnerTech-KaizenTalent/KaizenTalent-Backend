@@ -24,10 +24,10 @@ public class ExperienciaLaboralHeadhuntingResponse {
     private String periodoinicioExperienciaLaboral;
 
     @JsonIgnore
-    private int mesfinExperienciaLaboral;
+    private String mesfinExperienciaLaboral;
 
     @JsonIgnore
-    private int aniofinExperienciaLaboral;
+    private String aniofinExperienciaLaboral;
 
     private String periodofinExperienciaLaboral;
 
@@ -40,7 +40,7 @@ public class ExperienciaLaboralHeadhuntingResponse {
     public ExperienciaLaboralHeadhuntingResponse(Long idExperienciaLaboral, String puestoExperienciaLaboral,
                                                  String empresaExperienciaLaboral, int mesinicioExperienciaLaboral,
                                                  int anioinicioExperienciaLaboral, String periodoinicioExperienciaLaboral,
-                                                 int mesfinExperienciaLaboral, int aniofinExperienciaLaboral,
+                                                 String mesfinExperienciaLaboral, String aniofinExperienciaLaboral,
                                                  String periodofinExperienciaLaboral, String descripcionExperienciaLaboral) {
         this.idExperienciaLaboral = idExperienciaLaboral;
         this.puestoExperienciaLaboral = puestoExperienciaLaboral;
@@ -103,19 +103,19 @@ public class ExperienciaLaboralHeadhuntingResponse {
         this.periodoinicioExperienciaLaboral = periodoinicioExperienciaLaboral;
     }
 
-    public int getMesfinExperienciaLaboral() {
+    public String getMesfinExperienciaLaboral() {
         return mesfinExperienciaLaboral;
     }
 
-    public void setMesfinExperienciaLaboral(int mesfinExperienciaLaboral) {
+    public void setMesfinExperienciaLaboral(String mesfinExperienciaLaboral) {
         this.mesfinExperienciaLaboral = mesfinExperienciaLaboral;
     }
 
-    public int getAniofinExperienciaLaboral() {
+    public String getAniofinExperienciaLaboral() {
         return aniofinExperienciaLaboral;
     }
 
-    public void setAniofinExperienciaLaboral(int aniofinExperienciaLaboral) {
+    public void setAniofinExperienciaLaboral(String aniofinExperienciaLaboral) {
         this.aniofinExperienciaLaboral = aniofinExperienciaLaboral;
     }
 
