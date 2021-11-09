@@ -91,8 +91,22 @@ public class HeadhuntingController {
 
             list_experienciaslaborales.forEach(
                     experienciaLaboral -> {
-                        if (!experienciaLaboral.getMesfinExperienciaLaboral().equals("") &&
-                                !experienciaLaboral.getAniofinExperienciaLaboral().equals("")) {
+                        if (experienciaLaboral.getMesfinExperienciaLaboral().equals("") &&
+                                experienciaLaboral.getAniofinExperienciaLaboral().equals("")) {
+                            experienciaslaborales.add(new ExperienciaLaboralHeadhuntingResponse(
+                                    experienciaLaboral.getIdExperienciaLaboral(),
+                                    experienciaLaboral.getNombreExperienciaLaboral(),
+                                    experienciaLaboral.getEmpresaExperienciaLaboral(),
+                                    Integer.parseInt(experienciaLaboral.getMesinicioExperienciaLaboral()),
+                                    Integer.parseInt(experienciaLaboral.getAnioinicioExperienciaLaboral()),
+                                    Code_Format.ConvierteMes(experienciaLaboral.getMesinicioExperienciaLaboral()) + " " +
+                                            experienciaLaboral.getAnioinicioExperienciaLaboral(),
+                                    0,
+                                    0,
+                                    "En Curso",
+                                    experienciaLaboral.getDescripcionExperienciaLaboral())
+                            );
+                        } else {
                             experienciaslaborales.add(new ExperienciaLaboralHeadhuntingResponse(
                                     experienciaLaboral.getIdExperienciaLaboral(),
                                     experienciaLaboral.getNombreExperienciaLaboral(),
@@ -107,27 +121,14 @@ public class HeadhuntingController {
                                             experienciaLaboral.getAniofinExperienciaLaboral(),
                                     experienciaLaboral.getDescripcionExperienciaLaboral())
                             );
-                        } else {
-                            experienciaslaborales.add(new ExperienciaLaboralHeadhuntingResponse(
-                                    experienciaLaboral.getIdExperienciaLaboral(),
-                                    experienciaLaboral.getNombreExperienciaLaboral(),
-                                    experienciaLaboral.getEmpresaExperienciaLaboral(),
-                                    Integer.parseInt(experienciaLaboral.getMesinicioExperienciaLaboral()),
-                                    Integer.parseInt(experienciaLaboral.getAnioinicioExperienciaLaboral()),
-                                    Code_Format.ConvierteMes(experienciaLaboral.getMesinicioExperienciaLaboral()) + " " +
-                                            experienciaLaboral.getAnioinicioExperienciaLaboral(),
-                                    0,
-                                    0,
-                                    "En Curso",
-                                    experienciaLaboral.getDescripcionExperienciaLaboral())
-                            );
                         }
                     }
             );
 
             Set<ExperienciaLaboralHeadhuntingResponse> list_experiencialaboral_sorted = experienciaslaborales.stream()
                     .sorted(Comparator.comparing(ExperienciaLaboralHeadhuntingResponse::getAnioinicioExperienciaLaboral)
-                            .thenComparing(ExperienciaLaboralHeadhuntingResponse::getMesinicioExperienciaLaboral).reversed()).collect(Collectors.toCollection(LinkedHashSet::new));
+                            .thenComparing(ExperienciaLaboralHeadhuntingResponse::getMesinicioExperienciaLaboral).reversed())
+                    .collect(Collectors.toCollection(LinkedHashSet::new));
 
             new ExperienciaLaboralHeadhuntingResponse();
             ExperienciaLaboralHeadhuntingResponse experiencialaboral_actual;
