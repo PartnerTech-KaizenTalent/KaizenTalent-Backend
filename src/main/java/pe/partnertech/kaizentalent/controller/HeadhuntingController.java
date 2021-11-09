@@ -91,22 +91,8 @@ public class HeadhuntingController {
 
             list_experienciaslaborales.forEach(
                     experienciaLaboral -> {
-                        if (experienciaLaboral.getMesfinExperienciaLaboral().equals("") &&
-                                experienciaLaboral.getAniofinExperienciaLaboral().equals("")) {
-                            experienciaslaborales.add(new ExperienciaLaboralHeadhuntingResponse(
-                                    experienciaLaboral.getIdExperienciaLaboral(),
-                                    experienciaLaboral.getNombreExperienciaLaboral(),
-                                    experienciaLaboral.getEmpresaExperienciaLaboral(),
-                                    Integer.parseInt(experienciaLaboral.getMesinicioExperienciaLaboral()),
-                                    Integer.parseInt(experienciaLaboral.getAnioinicioExperienciaLaboral()),
-                                    Code_Format.ConvierteMes(experienciaLaboral.getMesinicioExperienciaLaboral()) + " " +
-                                            experienciaLaboral.getAnioinicioExperienciaLaboral(),
-                                    0,
-                                    0,
-                                    "En Curso",
-                                    experienciaLaboral.getDescripcionExperienciaLaboral()
-                            ));
-                        } else {
+                        if (!experienciaLaboral.getMesfinExperienciaLaboral().equals("") &&
+                                !experienciaLaboral.getAniofinExperienciaLaboral().equals("")) {
                             experienciaslaborales.add(new ExperienciaLaboralHeadhuntingResponse(
                                     experienciaLaboral.getIdExperienciaLaboral(),
                                     experienciaLaboral.getNombreExperienciaLaboral(),
@@ -119,7 +105,22 @@ public class HeadhuntingController {
                                     Integer.parseInt(experienciaLaboral.getAniofinExperienciaLaboral()),
                                     Code_Format.ConvierteMes(experienciaLaboral.getMesfinExperienciaLaboral()) + " " +
                                             experienciaLaboral.getAniofinExperienciaLaboral(),
-                                    experienciaLaboral.getDescripcionExperienciaLaboral()));
+                                    experienciaLaboral.getDescripcionExperienciaLaboral())
+                            );
+                        } else {
+                            experienciaslaborales.add(new ExperienciaLaboralHeadhuntingResponse(
+                                    experienciaLaboral.getIdExperienciaLaboral(),
+                                    experienciaLaboral.getNombreExperienciaLaboral(),
+                                    experienciaLaboral.getEmpresaExperienciaLaboral(),
+                                    Integer.parseInt(experienciaLaboral.getMesinicioExperienciaLaboral()),
+                                    Integer.parseInt(experienciaLaboral.getAnioinicioExperienciaLaboral()),
+                                    Code_Format.ConvierteMes(experienciaLaboral.getMesinicioExperienciaLaboral()) + " " +
+                                            experienciaLaboral.getAnioinicioExperienciaLaboral(),
+                                    0,
+                                    0,
+                                    "En Curso",
+                                    experienciaLaboral.getDescripcionExperienciaLaboral())
+                            );
                         }
                     }
             );
