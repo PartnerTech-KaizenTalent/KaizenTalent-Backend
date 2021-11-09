@@ -79,7 +79,7 @@ public class HeadhuntingController {
 
     Set<String> SendInstituciones(Set<Educacion> list_educaciones) {
 
-        if (list_educaciones == null) {
+        if (list_educaciones.size() == 0) {
             return null;
         } else {
             return list_educaciones.stream()
