@@ -126,7 +126,7 @@ public class HeadhuntingController {
 
             return experienciaslaborales.stream()
                     .sorted(Comparator.comparing(ExperienciaLaboralHeadhuntingResponse::getAnioinicioExperienciaLaboral)
-                            .thenComparing(ExperienciaLaboralHeadhuntingResponse::getMesinicioExperienciaLaboral)).collect(Collectors.toCollection(LinkedHashSet::new));
+                            .thenComparing(ExperienciaLaboralHeadhuntingResponse::getMesinicioExperienciaLaboral).reversed()).collect(Collectors.toCollection(LinkedHashSet::new));
         }
     }
 
