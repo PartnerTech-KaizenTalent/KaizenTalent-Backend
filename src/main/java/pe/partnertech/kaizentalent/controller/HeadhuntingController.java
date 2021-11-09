@@ -80,6 +80,14 @@ public class HeadhuntingController {
         Set<InstitucionesHeadhuntingResponse> list_instituciones = list_educaciones.stream().map(
                 educacion -> new InstitucionesHeadhuntingResponse(educacion.getInstitucionEducacion())).collect(Collectors.toSet());
 
-        return list_instituciones.stream().toArray(String[]::new);
+        String[] instituciones_postulante = new String[list_instituciones.size()];
+        int index = 0;
+        for (InstitucionesHeadhuntingResponse instituciones : list_instituciones) {
+
+            instituciones_postulante[index] = String.valueOf(instituciones);
+            index++;
+        }
+
+        return instituciones_postulante;
     }
 }
