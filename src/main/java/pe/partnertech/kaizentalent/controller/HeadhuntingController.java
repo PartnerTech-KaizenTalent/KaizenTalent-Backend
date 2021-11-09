@@ -19,6 +19,8 @@ import pe.partnertech.kaizentalent.service.IExperienciaLaboralService;
 import pe.partnertech.kaizentalent.service.IUsuarioService;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -75,19 +77,10 @@ public class HeadhuntingController {
         return new ResponseEntity<>(list_headhunting, HttpStatus.OK);
     }
 
-    String[] SendInstituciones(Set<Educacion> list_educaciones) {
+    Set<String> SendInstituciones(Set<Educacion> list_educaciones) {
 
-        Set<InstitucionesHeadhuntingResponse> list_instituciones = list_educaciones.stream().map(
-                educacion -> new InstitucionesHeadhuntingResponse(educacion.getInstitucionEducacion())).collect(Collectors.toSet());
-
-        String[] instituciones_postulante = new String[list_instituciones.size()];
-        int index = 0;
-        for (InstitucionesHeadhuntingResponse instituciones : list_instituciones) {
-
-            instituciones_postulante[index] = String.valueOf(instituciones);
-            index++;
-        }
-
-        return instituciones_postulante;
+        return list_educaciones.stream()
+                .map(educacion -> Objects.toString(educacion, null))
+                .collect(Collectors.toSet());
     }
 }

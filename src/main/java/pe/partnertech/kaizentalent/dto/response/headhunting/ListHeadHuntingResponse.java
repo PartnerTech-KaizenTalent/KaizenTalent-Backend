@@ -28,7 +28,7 @@ public class ListHeadHuntingResponse {
 
     @JsonIgnore
     private Set<Educacion> listEducaciones;
-    private String[] institucionesPostulante;
+    private Set<String> institucionesPostulante;
 
     @JsonIgnore
     private Set<Conocimiento> listConocimientos;
@@ -54,10 +54,10 @@ public class ListHeadHuntingResponse {
     public ListHeadHuntingResponse(Long idPostulante, ImagenResponse fotoperfilPostulante, String sueldoPostulante,
                                    String nombrePostulante, String tituloPostulante, String telefonoPostulante,
                                    String ciudadPostulante, Set<Educacion> listEducaciones,
-                                   String[] institucionesPostulante,
-                                   Set<Conocimiento> listConocimientos, String conocimientosPostulante,
-                                   Set<Habilidad> listHabilidades, String habilidadesPostulante, Set<Idioma> listIdiomas,
-                                   String idiomasPostulante, LocalDate fechanacimientoPostulante, long edadPostulante) {
+                                   Set<String> institucionesPostulante, Set<Conocimiento> listConocimientos,
+                                   String conocimientosPostulante, Set<Habilidad> listHabilidades,
+                                   String habilidadesPostulante, Set<Idioma> listIdiomas, String idiomasPostulante,
+                                   LocalDate fechanacimientoPostulante, long edadPostulante) {
         this.idPostulante = idPostulante;
         this.fotoperfilPostulante = fotoperfilPostulante;
         this.sueldoPostulante = sueldoPostulante;
@@ -143,11 +143,11 @@ public class ListHeadHuntingResponse {
         this.listEducaciones = listEducaciones;
     }
 
-    public String[] getInstitucionesPostulante() {
+    public Set<String> getInstitucionesPostulante() {
         return institucionesPostulante;
     }
 
-    public void setInstitucionesPostulante(String[] institucionesPostulante) {
+    public void setInstitucionesPostulante(Set<String> institucionesPostulante) {
         this.institucionesPostulante = institucionesPostulante;
     }
 
