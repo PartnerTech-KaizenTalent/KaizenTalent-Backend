@@ -15,6 +15,7 @@ import pe.partnertech.kaizentalent.controller.util.util_code.Code_Format;
 import pe.partnertech.kaizentalent.dto.response.general.ImagenResponse;
 import pe.partnertech.kaizentalent.dto.response.headhunting.ExperienciaLaboralHeadhuntingResponse;
 import pe.partnertech.kaizentalent.dto.response.headhunting.ListHeadHuntingResponse;
+import pe.partnertech.kaizentalent.dto.response.headhunting.filters.ConocimientoHeadhuntingResponse;
 import pe.partnertech.kaizentalent.model.*;
 import pe.partnertech.kaizentalent.service.IExperienciaLaboralService;
 import pe.partnertech.kaizentalent.service.IUsuarioService;
@@ -84,7 +85,6 @@ public class HeadhuntingController {
         if (list_experienciaslaborales.size() == 0) {
             return null;
         } else {
-
             Set<ExperienciaLaboralHeadhuntingResponse> experienciaslaborales = new HashSet<>();
 
             list_experienciaslaborales.forEach(
@@ -154,15 +154,19 @@ public class HeadhuntingController {
         if (list_conocimientos.size() == 0) {
             return null;
         } else {
-            Set<String> nombre_conocimientos = list_conocimientos.stream()
-                    .map(Conocimiento::getNombreConocimiento)
-                    .collect(Collectors.toSet());
+            Set<ConocimientoHeadhuntingResponse> conocimientos_postulante = new HashSet<>();
 
-            Set<String> nivel_conocimientos = list_conocimientos.stream()
-                    .map(Conocimiento::getNivelConocimiento)
-                    .collect(Collectors.toSet());
+            list_conocimientos.forEach(
+                    conocimiento -> {
+                        conocimientos_postulante.add(
+                                new ConocimientoHeadhuntingResponse(
+                                        conocimiento.getNombreConocimiento() + "-" + conocimiento.getNivelConocimiento()
+                                ));
+                    }
+            );
 
-            Set<String> conocimientos = Stream.concat(nombre_conocimientos.stream(), nivel_conocimientos.stream())
+            Set<String> conocimientos = conocimientos_postulante.stream()
+                    .map(ConocimientoHeadhuntingResponse::getConocimiento)
                     .collect(Collectors.toSet());
 
             return String.join(", ", conocimientos);
