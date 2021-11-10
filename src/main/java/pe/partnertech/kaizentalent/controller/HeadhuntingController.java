@@ -21,7 +21,10 @@ import pe.partnertech.kaizentalent.service.IExperienciaLaboralService;
 import pe.partnertech.kaizentalent.service.IUsuarioService;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.YEARS;
