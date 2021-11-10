@@ -84,7 +84,9 @@ public class HeadhuntingController {
 
     Double SendSueldo(String sueldo_postulante) {
 
-        if (sueldo_postulante.equals("")) {
+        if (sueldo_postulante == null) {
+            return 0.00;
+        } else if (sueldo_postulante.equals("")) {
             return 0.00;
         } else {
             return Double.parseDouble(sueldo_postulante);
