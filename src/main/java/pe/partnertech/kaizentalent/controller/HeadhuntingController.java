@@ -15,7 +15,7 @@ import pe.partnertech.kaizentalent.controller.util.util_code.Code_Format;
 import pe.partnertech.kaizentalent.dto.response.general.ImagenResponse;
 import pe.partnertech.kaizentalent.dto.response.headhunting.ExperienciaLaboralHeadhuntingResponse;
 import pe.partnertech.kaizentalent.dto.response.headhunting.ListHeadHuntingResponse;
-import pe.partnertech.kaizentalent.dto.response.headhunting.filters.ConocimientoHeadhuntingResponse;
+import pe.partnertech.kaizentalent.dto.response.headhunting.SkillFilterHeadhuntingResponse;
 import pe.partnertech.kaizentalent.model.*;
 import pe.partnertech.kaizentalent.service.IExperienciaLaboralService;
 import pe.partnertech.kaizentalent.service.IUsuarioService;
@@ -23,7 +23,6 @@ import pe.partnertech.kaizentalent.service.IUsuarioService;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.time.temporal.ChronoUnit.YEARS;
 
@@ -154,19 +153,19 @@ public class HeadhuntingController {
         if (list_conocimientos.size() == 0) {
             return null;
         } else {
-            Set<ConocimientoHeadhuntingResponse> conocimientos_postulante = new HashSet<>();
+            Set<SkillFilterHeadhuntingResponse> conocimientos_postulante = new HashSet<>();
 
             list_conocimientos.forEach(
                     conocimiento -> {
                         conocimientos_postulante.add(
-                                new ConocimientoHeadhuntingResponse(
-                                        conocimiento.getNombreConocimiento() + "-" + conocimiento.getNivelConocimiento()
+                                new SkillFilterHeadhuntingResponse(
+                                        conocimiento.getNombreConocimiento() + " " + conocimiento.getNivelConocimiento()
                                 ));
                     }
             );
 
             Set<String> conocimientos = conocimientos_postulante.stream()
-                    .map(ConocimientoHeadhuntingResponse::getConocimiento)
+                    .map(SkillFilterHeadhuntingResponse::getSkill)
                     .collect(Collectors.toSet());
 
             return String.join(", ", conocimientos);
