@@ -19,7 +19,7 @@ public class ListHeadHuntingResponse {
     //Atributos
     private Long idPostulante;
     private ImagenResponse fotoperfilPostulante;
-    private String sueldoPostulante;
+    private Double sueldoPostulante;
     private String nombrePostulante;
     @JsonIgnore
     private Set<ExperienciaLaboral> listExperienciasLaborales;
@@ -44,7 +44,7 @@ public class ListHeadHuntingResponse {
     public ListHeadHuntingResponse() {
     }
 
-    public ListHeadHuntingResponse(Long idPostulante, ImagenResponse fotoperfilPostulante, String sueldoPostulante,
+    public ListHeadHuntingResponse(Long idPostulante, ImagenResponse fotoperfilPostulante, Double sueldoPostulante,
                                    String nombrePostulante, Set<ExperienciaLaboral> listExperienciasLaborales,
                                    ExperienciaLaboralHeadhuntingResponse experiencialaboralPostulante,
                                    String tituloPostulante, String telefonoPostulante, String ciudadPostulante,
@@ -106,11 +106,11 @@ public class ListHeadHuntingResponse {
         this.fotoperfilPostulante = fotoperfilPostulante;
     }
 
-    public String getSueldoPostulante() {
+    public Double getSueldoPostulante() {
         return sueldoPostulante;
     }
 
-    public void setSueldoPostulante(String sueldoPostulante) {
+    public void setSueldoPostulante(Double sueldoPostulante) {
         this.sueldoPostulante = sueldoPostulante;
     }
 

@@ -59,7 +59,7 @@ public class HeadhuntingController {
                                         postulantes.getImagenUsuario().getNombreImagen(),
                                         postulantes.getImagenUsuario().getUrlImagen()
                                 ),
-                                postulantes.getSueldoUsuario(),
+                                SendSueldo(postulantes.getSueldoUsuario()),
                                 postulantes.getNombreUsuario() + " " + postulantes.getApellidoUsuario(),
                                 postulantes.getExperienciaslaboralesUsuario(),
                                 SendExperienciaLaboral(postulantes.getExperienciaslaboralesUsuario()),
@@ -80,6 +80,15 @@ public class HeadhuntingController {
         );
 
         return new ResponseEntity<>(list_headhunting, HttpStatus.OK);
+    }
+
+    Double SendSueldo(String sueldo_postulante) {
+
+        if (sueldo_postulante.equals("")) {
+            return 0.00;
+        } else {
+            return Double.parseDouble(sueldo_postulante);
+        }
     }
 
     ExperienciaLaboralHeadhuntingResponse SendExperienciaLaboral(Set<ExperienciaLaboral> list_experienciaslaborales) {
