@@ -15,6 +15,7 @@ import pe.partnertech.kaizentalent.controller.util.util_code.Code_Format;
 import pe.partnertech.kaizentalent.dto.response.general.ImagenResponse;
 import pe.partnertech.kaizentalent.dto.response.headhunting.ExperienciaLaboralHeadhuntingResponse;
 import pe.partnertech.kaizentalent.dto.response.headhunting.ListHeadHuntingResponse;
+import pe.partnertech.kaizentalent.dto.response.headhunting.SkillFilterHeadhuntingResponse;
 import pe.partnertech.kaizentalent.model.*;
 import pe.partnertech.kaizentalent.service.IExperienciaLaboralService;
 import pe.partnertech.kaizentalent.service.IUsuarioService;
@@ -86,7 +87,6 @@ public class HeadhuntingController {
         if (list_experienciaslaborales.size() == 0) {
             return null;
         } else {
-
             Set<ExperienciaLaboralHeadhuntingResponse> experienciaslaborales = new HashSet<>();
 
             list_experienciaslaborales.forEach(
@@ -156,8 +156,17 @@ public class HeadhuntingController {
         if (list_conocimientos.size() == 0) {
             return null;
         } else {
-            Set<String> conocimientos = list_conocimientos.stream()
-                    .map(Conocimiento::getNombreConocimiento)
+            Set<SkillFilterHeadhuntingResponse> conocimientos_postulante = new HashSet<>();
+
+            list_conocimientos.forEach(
+                    conocimiento -> conocimientos_postulante.add(
+                            new SkillFilterHeadhuntingResponse(
+                                    conocimiento.getNombreConocimiento() + conocimiento.getNivelConocimiento()
+                            ))
+            );
+
+            Set<String> conocimientos = conocimientos_postulante.stream()
+                    .map(SkillFilterHeadhuntingResponse::getSkill)
                     .collect(Collectors.toSet());
 
             return String.join(", ", conocimientos);
@@ -169,8 +178,17 @@ public class HeadhuntingController {
         if (list_habilidades.size() == 0) {
             return null;
         } else {
-            Set<String> habilidades = list_habilidades.stream()
-                    .map(Habilidad::getNombreHabilidad)
+            Set<SkillFilterHeadhuntingResponse> habilidades_postulante = new HashSet<>();
+
+            list_habilidades.forEach(
+                    habilidad -> habilidades_postulante.add(
+                            new SkillFilterHeadhuntingResponse(
+                                    habilidad.getNombreHabilidad() + habilidad.getNivelHabilidad()
+                            ))
+            );
+
+            Set<String> habilidades = habilidades_postulante.stream()
+                    .map(SkillFilterHeadhuntingResponse::getSkill)
                     .collect(Collectors.toSet());
 
             return String.join(", ", habilidades);
@@ -182,8 +200,17 @@ public class HeadhuntingController {
         if (list_idiomas.size() == 0) {
             return null;
         } else {
-            Set<String> idiomas = list_idiomas.stream()
-                    .map(Idioma::getNombreIdioma)
+            Set<SkillFilterHeadhuntingResponse> idiomas_postulante = new HashSet<>();
+
+            list_idiomas.forEach(
+                    idioma -> idiomas_postulante.add(
+                            new SkillFilterHeadhuntingResponse(
+                                    idioma.getNombreIdioma() + idioma.getNivelIdioma()
+                            ))
+            );
+
+            Set<String> idiomas = idiomas_postulante.stream()
+                    .map(SkillFilterHeadhuntingResponse::getSkill)
                     .collect(Collectors.toSet());
 
             return String.join(", ", idiomas);

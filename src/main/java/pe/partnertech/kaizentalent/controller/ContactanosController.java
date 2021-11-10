@@ -1,7 +1,6 @@
 package pe.partnertech.kaizentalent.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
