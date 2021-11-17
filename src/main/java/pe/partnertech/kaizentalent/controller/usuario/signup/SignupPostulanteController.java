@@ -156,7 +156,7 @@ public class SignupPostulanteController {
                             EnviarCorreo(postulanteSignupRequest.getEmailUsuario(), url);
 
                             //Generando Token: Verificación
-                            Code_SendEmail.SaveUtilityToken(token, postulante, utilityTokenService);
+                            Code_SendEmail.SaveUtilityToken_UsuarioVerify(token, postulante, utilityTokenService);
 
                             usuarioService.GuardarUsuario(postulante);
 

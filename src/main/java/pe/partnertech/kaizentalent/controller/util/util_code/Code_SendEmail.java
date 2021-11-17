@@ -75,7 +75,7 @@ public class Code_SendEmail {
         mailSender.send(message);
     }
 
-    public static void SaveUtilityToken(String token, Usuario usuario, IUtilityTokenService utilityTokenService) {
+    public static void SaveUtilityToken_UsuarioVerify(String token, Usuario usuario, IUtilityTokenService utilityTokenService) {
 
         UtilityToken utilityToken = new UtilityToken(
                 token,

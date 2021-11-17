@@ -149,7 +149,7 @@ public class SignupReclutadorController {
                             EnviarCorreo(reclutadorSignupRequest.getEmailUsuario(), url);
 
                             //Generando Token: Verificación
-                            Code_SendEmail.SaveUtilityToken(token, reclutador, utilityTokenService);
+                            Code_SendEmail.SaveUtilityToken_UsuarioVerify(token, reclutador, utilityTokenService);
 
                             usuarioService.GuardarUsuario(reclutador);
 
