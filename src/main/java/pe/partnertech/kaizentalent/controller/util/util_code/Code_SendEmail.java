@@ -8,10 +8,14 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+import pe.partnertech.kaizentalent.model.Usuario;
+import pe.partnertech.kaizentalent.model.UtilityToken;
+import pe.partnertech.kaizentalent.service.IUtilityTokenService;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,5 +73,17 @@ public class Code_SendEmail {
         helper.setText(html_template, true);
 
         mailSender.send(message);
+    }
+
+    public static void SaveUtilityToken(String token, Usuario usuario, IUtilityTokenService utilityTokenService) {
+
+        UtilityToken utilityToken = new UtilityToken(
+                token,
+                "Usuario Verify",
+                LocalDateTime.now().plusHours(72),
+                usuario
+        );
+
+        utilityTokenService.GuardarUtilityToken(utilityToken);
     }
 }

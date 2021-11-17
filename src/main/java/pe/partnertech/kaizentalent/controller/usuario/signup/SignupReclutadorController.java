@@ -34,7 +34,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RestController
@@ -145,18 +144,12 @@ public class SignupReclutadorController {
 
                             String token = RandomString.make(50);
 
-                            //Generando Token: Verificación
-                            UtilityToken utilityToken = new UtilityToken(
-                                    token,
-                                    "Usuario Verify",
-                                    LocalDateTime.now().plusHours(72),
-                                    reclutador
-                            );
-                            utilityTokenService.GuardarUtilityToken(utilityToken);
-
                             String url = UtilityKaizenTalent.GenerarUrl(request) + "/api/reclutador_verify_gateway?token=" + token;
 
                             EnviarCorreo(reclutadorSignupRequest.getEmailUsuario(), url);
+
+                            //Generando Token: Verificación
+                            Code_SendEmail.SaveUtilityToken(token, reclutador, utilityTokenService);
 
                             usuarioService.GuardarUsuario(reclutador);
 
